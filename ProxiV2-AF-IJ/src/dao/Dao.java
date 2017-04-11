@@ -197,7 +197,6 @@ public class Dao implements IDao {
 
 	@Override
 	public Client retourneClientParId(int IdClient) {
-
 		return null;
 	}
 
@@ -211,7 +210,7 @@ public class Dao implements IDao {
 			Connection conn = DaoConnexion.getConnexion();
 
 			// 3- créer la requête
-			PreparedStatement ps = conn.prepareStatement("SELECT FROM Client where id_conseiller = ?");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Client where id_conseiller = ?");
 			ps.setInt(1, idConseiller);
 			// 4- executer la requête
 			ResultSet rs = ps.executeQuery();
