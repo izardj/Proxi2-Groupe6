@@ -28,10 +28,15 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Lister clients</a></li>
-					<li>Test</li>
-					<li><a href="LogoutServlet">Se deconnecter</a></li>
+					<li class="active"><a href="ListerClients">Lister clients</a></li>
 				</ul>
+				<p class="navbar-text navbar-right">
+					<a href="LogoutServlet">Se deconnecter</a>
+				</p>
+				<p class="navbar-text navbar-right">
+					Connecté en tant que
+					<c:out value="${conseiller.nom}" />
+				</p>
 			</div>
 			<!--/.nav-collapse -->
 		</div>
@@ -41,43 +46,44 @@
 
 		<div class="starter-template">
 			<h1>Gestion des clients</h1>
-				<h2 class="sub-header">Liste des clients</h2>
-				<c:if test="${! empty clients}">
-					<div class="table-responsive">
-						<table class="table table-striped">
-							<thead>
+			<h2 class="sub-header">Liste des clients</h2>
+			<c:if test="${! empty clients}">
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>NOM</th>
+								<th>PRENOM</th>
+								<th>NOM ENTREPRISE</th>
+								<th>ADRESSE</th>
+								<th>VILLE</th>
+								<th>CODE POSTAL</th>
+								<th>TELEPHONE</th>
+								<th>EMAIL</th>
+								<th>ACTION</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="c" items="${clients}">
 								<tr>
-									<th>ID</th>
-									<th>NOM</th>
-									<th>PRENOM</th>
-									<th>NOM ENTREPRISE</th>
-									<th>ADRESSE</th>
-									<th>VILLE</th>
-									<th>CODE POSTAL</th>
-									<th>TELEPHONE</th>
-									<th>EMAIL</th>
-									<th>ACTION</th>
+									<td><c:out value="${c.idClient}"></c:out></td>
+									<td><c:out value="${c.nom}"></c:out></td>
+									<td><c:out value="${c.prenom}"></c:out></td>
+									<td><c:out value="${c.nomEntreprise}"></c:out></td>
+									<td><c:out value="${c.adresse}"></c:out></td>
+									<td><c:out value="${c.ville}"></c:out></td>
+									<td><c:out value="${c.codePostal}"></c:out></td>
+									<td><c:out value="${c.telephone}"></c:out></td>
+									<td><c:out value="${c.email}"></c:out></td>
+									<td><a
+										href="AfficherClient?id=<c:out value='${c.idClient}' />">Afficher</a></td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="c" items="${clients}">
-									<tr>
-										<td><c:out value="${c.idClient}"></c:out></td>
-										<td><c:out value="${c.nom}"></c:out></td>
-										<td><c:out value="${c.prenom}"></c:out></td>
-										<td><c:out value="${c.nomEntreprise}"></c:out></td>
-										<td><c:out value="${c.adresse}"></c:out></td>
-										<td><c:out value="${c.ville}"></c:out></td>
-										<td><c:out value="${c.codePostal}"></c:out></td>
-										<td><c:out value="${c.telephone}"></c:out></td>
-										<td><c:out value="${c.email}"></c:out></td>
-										<td><a href="AfficherClient?id=<c:out value='${c.idClient}' />" >Afficher</a></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</c:if>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</c:if>
 		</div>
 
 	</div>

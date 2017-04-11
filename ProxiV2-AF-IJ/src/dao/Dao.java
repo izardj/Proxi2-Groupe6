@@ -207,11 +207,13 @@ public class Dao implements IDao {
 			// 3- créer la requête
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Client where id_client = ?");
 			ps.setInt(1, idClient);
+			PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Compte where id_client = ?");
+			ps2.setInt(1, idClient);
 			// 4- executer la requête
 			ResultSet rs = ps.executeQuery();
+			ResultSet rs2 = ps2.executeQuery();
 			// 5- présenter les résultats
-			
-				
+			if (rs.next()) {
 				c.setIdClient(rs.getInt("id_client"));
 				c.setNom(rs.getString("nom"));
 				c.setPrenom(rs.getString("prenom"));
@@ -222,50 +224,41 @@ public class Dao implements IDao {
 				c.setEntreprise(rs.getBoolean("entreprise"));
 				c.setNomEntreprise(rs.getString("nom_entreprise"));
 				c.setEmail(rs.getString("email"));
-				// 3- créer la requête
-				PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Compte where id_client = ?");
-				ps2.setInt(1, idClient);
-				Collection<Compte> comptes = new ArrayList<Compte>();
-				ResultSet rs2 = ps2.executeQuery();
-				while (rs2.next()) {
-					String typeCompte = rs2.getString("type_compte");
-					if(typeCompte.equals("CompteCourant")){
+			}
+			// 3- créer la requête
+			Collection<Compte> comptes = new ArrayList<Compte>();
+			while (rs2.next()) {
+				String typeCompte = rs2.getString("type_compte");
+				if (typeCompte.equals("CompteCourant")) {
 					CompteCourant cc = new CompteCourant();
 					cc.setIdCompte(rs2.getInt("id_compte"));
 					cc.setNumeroCompte(rs2.getInt("num_compte"));
 					cc.setSolde(rs2.getDouble("solde"));
 					cc.setDateOuverture(rs2.getString("date_ouverture"));
-					cc.setDecouvert(rs.getDouble("decouvert"));
+					cc.setDecouvert(rs2.getDouble("decouvert"));
 					comptes.add(cc);
-					}
-					else{
-						CompteEpargne ce = new CompteEpargne();
-						ce.setIdCompte(rs2.getInt("id_compte"));
-						ce.setNumeroCompte(rs2.getInt("num_compte"));
-						ce.setSolde(rs2.getDouble("solde"));
-						ce.setDateOuverture(rs2.getString("date_ouverture"));
-						ce.setRemuneration(rs.getDouble("renumeration"));
-						comptes.add(ce);
-						
-					}
-					c.setComptes(comptes);
-					
-				
+				} else {
+					CompteEpargne ce = new CompteEpargne();
+					ce.setIdCompte(rs2.getInt("id_compte"));
+					ce.setNumeroCompte(rs2.getInt("num_compte"));
+					ce.setSolde(rs2.getDouble("solde"));
+					ce.setDateOuverture(rs2.getString("date_ouverture"));
+					ce.setRemuneration(rs2.getDouble("remuneration"));
+					comptes.add(ce);
 
-				
+				}
+				c.setComptes(comptes);
+
 			}
-			// 6- fermer la connexion
-			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			// code qui est executé quelque soit les étapes précédentes
+			DaoConnexion.closeConnexion();
 		}
 		return c;
 	}
-
-	
 
 	@Override
 	public Collection<Client> listerClientsParConseiller(int idConseiller) {
@@ -295,13 +288,13 @@ public class Dao implements IDao {
 
 				clients.add(c);
 			}
-			// 6- fermer la connexion
-			conn.close();
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			// code qui est executé quelque soit les étapes précédentes
+			// Fermer la connexion
+			DaoConnexion.closeConnexion();
 		}
 		return clients;
 	}

@@ -28,10 +28,16 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Lister clients</a></li>
-					<li>Test</li>
-					<li><a href="LogoutServlet">Se deconnecter</a></li>
+					<li class="active"><a href="ListerClients">Lister clients</a></li>
 				</ul>
+				<p class="navbar-text navbar-right">
+					<a href="LogoutServlet">Se deconnecter</a>
+				</p>
+				<p class="navbar-text navbar-right">
+					Connecté en tant que
+					<c:out value="${conseiller.nom}" />
+				</p>
+				
 			</div>
 			<!--/.nav-collapse -->
 		</div>
@@ -55,7 +61,7 @@
 				<c:forEach var="c" items="${client.comptes}">
 					<li>
 						<ul>
-							<li>Numéro : <c:out value="${c.numCompte}" /></li>
+							<li>Numéro : <c:out value="${c.numeroCompte}" /></li>
 							<li>Solde : <c:out value="${c.solde}" /></li>
 							<li>Date ouverture : <c:out value="${c.dateOuverture}" /></li>
 						</ul>
