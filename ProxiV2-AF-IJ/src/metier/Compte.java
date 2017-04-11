@@ -5,7 +5,7 @@ public abstract class Compte {
 	private int idCompte;
 	private int numeroCompte;
 	private double solde;
-	private long dateOuverture;
+	private String dateOuverture;
 	private Client client;
 	private CarteBancaire carteBancaire;
 
