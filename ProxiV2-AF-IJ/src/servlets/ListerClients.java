@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import metier.Client;
 import metier.Conseiller;
-import service.ILoginService;
+import service.IConseillerService;
 import service.Services;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class ListerClients
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/ListerClients")
+public class ListerClients extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private IConseillerService service = new Services();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginServlet() {
+	public ListerClients() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,35 +36,20 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// mdéfini l'encodage des paramètres en UTF-8
+		// défini l'encodage des paramètres en UTF-8
 		request.setCharacterEncoding("UTF-8");
-
-		// 1- Récupération les paramètres
-		String login = request.getParameter("login");
-		String pwd = request.getParameter("pwd");
-
-		// 2- Traitement avec la couche service
-		// TODO utiliser la couche service pour identifier client plutot qu'en dur
-		ILoginService ls = new Services();
-		Conseiller conseiller = ls.verificationLogin(login, pwd);
 		
-		// verifie si le conseiller existe
-		if (conseiller.getIdConseiller() != 0) {
-			// creer session
+		if(request.isRequestedSessionIdValid()){
 			HttpSession session = request.getSession();
-			session.setAttribute("conseiller", conseiller);
+			Conseiller conseiller = (Conseiller) session.getAttribute("conseiller");
+			Collection<Client> clients = service.listerClients(conseiller);
+			request.setAttribute("clients",	clients);
 			
-			// Envoi vers la JSP qui liste les clients
-			request.getRequestDispatcher("/ListerClients").forward(request, response);
-		} else {
-			// 3- Préparation de l'envoi
-			request.setAttribute("erreur", "Echec identification conseiller, veuillez réessayer.");
-			// 4 Envoi vers la JSP d'identification
+			request.getRequestDispatcher("/listerClients.jsp").forward(request, response);
+		}
+		else{
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
-
-
-
 	}
 
 	/**
