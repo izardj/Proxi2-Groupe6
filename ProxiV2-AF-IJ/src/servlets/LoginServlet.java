@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 		Conseiller conseiller = ls.verificationLogin(login, pwd);
 		
 		// verifie si le conseiller existe
-		if (conseiller.getIdConseiller() == 0) {
+		if (conseiller.getIdConseiller() != 0) {
 			// 4 Envoi vers la JSP qui liste les clients
 			request.getRequestDispatcher("/listerClients.jsp").forward(request, response);
 		} else {
