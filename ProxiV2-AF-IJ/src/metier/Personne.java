@@ -9,51 +9,51 @@ public abstract class Personne {
 	private String telephone;
 	private String email;
 
-	protected String getNom() {
+	public String getNom() {
 		return nom;
 	}
 
-	protected void setNom(String nom) {
+	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
-	protected String getPrenom() {
+	public String getPrenom() {
 		return prenom;
 	}
 
-	protected void setPrenom(String prenom) {
+	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
-	protected String getAdresse() {
+	public String getAdresse() {
 		return adresse;
 	}
 
-	protected void setAdresse(String adresse) {
+	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
 
-	protected String getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 
-	protected void setCodePostal(String codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 
-	protected String getVille() {
+	public String getVille() {
 		return ville;
 	}
 
-	protected void setVille(String ville) {
+	public void setVille(String ville) {
 		this.ville = ville;
 	}
 
-	protected String getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
-	protected void setTelephone(String telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 

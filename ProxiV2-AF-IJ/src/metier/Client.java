@@ -61,73 +61,73 @@ public abstract class Client extends Personne {
 	
 
 	@Override
-	protected String getNom() {
+	public String getNom() {
 		// TODO Auto-generated method stub
 		return super.getNom();
 	}
 
 	@Override
-	protected void setNom(String nom) {
+	public void setNom(String nom) {
 		// TODO Auto-generated method stub
 		super.setNom(nom);
 	}
 
 	@Override
-	protected String getPrenom() {
+	public String getPrenom() {
 		// TODO Auto-generated method stub
 		return super.getPrenom();
 	}
 
 	@Override
-	protected void setPrenom(String prenom) {
+	public void setPrenom(String prenom) {
 		// TODO Auto-generated method stub
 		super.setPrenom(prenom);
 	}
 
 	@Override
-	protected String getAdresse() {
+	public String getAdresse() {
 		// TODO Auto-generated method stub
 		return super.getAdresse();
 	}
 
 	@Override
-	protected void setAdresse(String adresse) {
+	public void setAdresse(String adresse) {
 		// TODO Auto-generated method stub
 		super.setAdresse(adresse);
 	}
 
 	@Override
-	protected String getCodePostal() {
+	public String getCodePostal() {
 		// TODO Auto-generated method stub
 		return super.getCodePostal();
 	}
 
 	@Override
-	protected void setCodePostal(String codePostal) {
+	public void setCodePostal(String codePostal) {
 		// TODO Auto-generated method stub
 		super.setCodePostal(codePostal);
 	}
 
 	@Override
-	protected String getVille() {
+	public String getVille() {
 		// TODO Auto-generated method stub
 		return super.getVille();
 	}
 
 	@Override
-	protected void setVille(String ville) {
+	public void setVille(String ville) {
 		// TODO Auto-generated method stub
 		super.setVille(ville);
 	}
 
 	@Override
-	protected String getTelephone() {
+	public String getTelephone() {
 		// TODO Auto-generated method stub
 		return super.getTelephone();
 	}
 
 	@Override
-	protected void setTelephone(String telephone) {
+	public void setTelephone(String telephone) {
 		// TODO Auto-generated method stub
 		super.setTelephone(telephone);
 	}
