@@ -51,23 +51,25 @@
 									<th>NOM</th>
 									<th>PRENOM</th>
 									<th>NOM ENTREPRISE</th>
-									<th>RUE</th>
+									<th>ADRESSE</th>
 									<th>VILLE</th>
 									<th>CODE POSTAL</th>
 									<th>TELEPHONE</th>
+									<th>EMAIL</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="c" items="${clients}">
 									<tr>
-										<td><c:out value="${c.id}"></c:out></td>
+										<td><c:out value="${c.idClient}"></c:out></td>
 										<td><c:out value="${c.nom}"></c:out></td>
 										<td><c:out value="${c.prenom}"></c:out></td>
 										<td><c:out value="${c.nomEntreprise}"></c:out></td>
-										<td><c:out value="${c.coordonnee.rue}"></c:out></td>
-										<td><c:out value="${c.coordonnee.ville}"></c:out></td>
-										<td><c:out value="${c.coordonnee.codePostal}"></c:out></td>
-										<td><c:out value="${c.coordonnee.telephone}"></c:out></td>
+										<td><c:out value="${c.adresse}"></c:out></td>
+										<td><c:out value="${c.ville}"></c:out></td>
+										<td><c:out value="${c.codePostal}"></c:out></td>
+										<td><c:out value="${c.telephone}"></c:out></td>
+										<td><c:out value="${c.email}"></c:out></td>
 									</tr>
 								</c:forEach>
 							</tbody>
