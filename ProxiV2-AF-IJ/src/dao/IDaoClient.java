@@ -8,4 +8,6 @@ import metier.Conseiller;
 public interface IDaoClient {
 	
 	public Collection<Client> listerClientParConseiller(id_conseiller);
+	public void modifierClient(Client client);
+	
 }
