@@ -16,12 +16,12 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public Conseiller verificationLogin(String login, String pwd) {
 		IDaoLogin iDaoLogin = new daoLogin();
-		return idaoLogin.verificationLogin(String login, String pwd);
+		return iDaoLogin.verificationLogin(login,pwd);
 	}
 
 	@Override
 	public Collection<Client> listerClients(Conseiller conseiller) {
-		return iDaoClient.listerClientParConseiller(idConseiller);
+		return iDaoClient.listerClientParConseiller(conseiller.getIdConseiller());
 	}
 
 	@Override
