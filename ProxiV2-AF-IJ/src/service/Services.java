@@ -2,8 +2,7 @@ package service;
 
 import java.util.Collection;
 
-import dao.IDaoClient;
-import dao.IDaoLogin;
+import dao.IDao;
 import metier.Client;
 import metier.Compte;
 import metier.CompteCourant;
@@ -12,17 +11,17 @@ import metier.Conseiller;
 
 public class Services implements IConseillerService, ILoginService {
 
-	private IDaoClient iDaoClient = new daoClient();
+	private IDao iDao = new Dao();
 
 	@Override
 	public Conseiller verificationLogin(String login, String pwd) {
-		IDaoLogin iDaoLogin = new daoLogin();
-		return iDaoLogin.verificationLogin(login, pwd);
+		
+		return iDao.verificationLogin(login, pwd);
 	}
 
 	@Override
 	public Collection<Client> listerClients(Conseiller conseiller) {
-		return iDaoClient.listerClientParConseiller(conseiller.getIdConseiller());
+		return iDao.listerClientParConseiller(conseiller.getIdConseiller());
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class Services implements IConseillerService, ILoginService {
 			client.setCodePostal(codePostal);
 			client.setVille(ville);
 			client.setTelephone(telephone);
-			iDaoClient.modifierClient(client);
+			iDao.modifierClient(client);
 		}
 
 	}
@@ -44,11 +43,12 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public Client afficherClient(Conseiller conseiller, Client client) {
 		if (client.getConseiller().equals(conseiller)) {
-			return iDaoClient.returnClientParId(client.getIdClient());
+			return iDao.returnClientParId(client.getIdClient());
 
 		}
 
 	}
+	
 	/**
 	 * Methode permettant de crediter un compte
 	 * 
@@ -110,29 +110,21 @@ public class Services implements IConseillerService, ILoginService {
 		return c;
 	}
 
-	/**
-	 * Methode qui permet de realiser des virement de compte a compte
-	 * @param conseiller conseiller qui realise le virement
-	 * 
-	 * @param client client a qui appartient le compte à débiter
-	 * 
-	 * @param montant
-	 *            Montant du virement
-	 * @param compteCred
-	 *            Compte a crediter
-	 * @param comptedeb
-	 *            Compte a debiter
-	 */
+
 	@Override
-	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte comptedeb,
+	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte compteDeb,
 			double montant) {
 		if (client.getConseiller().equals(conseiller)) {
-			double s = comptedeb.getSolde();
-			debiterCompte(comptedeb, montant); // debite un compte
+			double s = compteDeb.getSolde();
+			compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde()); // debite un compte
+			
 			// verification que le debit a eu lieu
-			if (s!=comptedeb.getSolde())
+			if (s!=compteDeb.getSolde())
 			{
-			crediterCompte(compteCred, montant); // credite un compte
+			compteCred.setSolde(crediterCompte(compteCred, montant).getSolde()); // credite un compte
+			
+			
+			return iDao.virement(compteCred,compteDeb);
 		}
 
 		return false;
