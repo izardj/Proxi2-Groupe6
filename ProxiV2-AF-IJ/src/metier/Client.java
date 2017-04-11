@@ -3,13 +3,19 @@ package metier;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public abstract class Client extends Personne {
+public class Client extends Personne {
 	private int idClient;
 	private boolean entreprise = false;
 	private String nomEntreprise;
 	private Collection<Compte> comptes = new ArrayList<Compte>();
 	private Collection<Placement> placements = new ArrayList<Placement>();
 	private Conseiller conseiller;
+	
+	
+
+	public Client() {
+		super();
+	}
 
 	public int getIdClient() {
 		return idClient;

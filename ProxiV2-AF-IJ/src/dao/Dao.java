@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import metier.Client;
@@ -74,9 +75,42 @@ public class Dao implements IDao {
 
 	@Override
 	public int modifierConseiller(Conseiller conseiller) {
-		// TODO Auto-generated method stub
-		return 0;
+		int i =0;
+		try {
+
+			// 2- créer la connexion
+			Connection conn = DaoConnexion.getConnexion();
+			// 3- créer la requête
+
+			PreparedStatement ps = conn.prepareStatement("UPDATE client SET nom = ? , prenom = ?, adresse = ?,code_postal =?, ville = ?,telephone = ?,login = ?, pwd = ?, WHERE id_conseiller = ?");
+			ps.setString(1, conseiller.getNom());
+			ps.setString(2, conseiller.getPrenom());
+			ps.setString(3, conseiller.getAdresse());
+			ps.setString(4, conseiller.getCodePostal());
+			ps.setString(5, conseiller.getVille());
+			ps.setString(6, conseiller.getTelephone());
+			ps.setString(7, conseiller.getLogin());
+			ps.setString(8, conseiller.getPwd());
+			ps.setInt(9,conseiller.getIdConseiller());
+
+			// 4- executer la requête
+			i = ps.executeUpdate();
+			// 5- présenter les résultats
+
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// code qui est executé quelque soit les étapes précédentes
+			// 6- fermer la connexion
+			DaoConnexion.closeConnexion();
+			
+		}
+		return i;
+
 	}
+	
 
 	@Override
 	public Conseiller verificationLogin(String login, String pwd) {
@@ -165,14 +199,46 @@ public class Dao implements IDao {
 
 	@Override
 	public Client retourneClientParId(int IdClient) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Collection<Client> listerClientsParConseiller(int idConseiller) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Collection<Client> clients = new ArrayList<Client>();
+		try {
+		// creer la connexion
+					Connection conn = DaoConnexion.getConnexion();
+
+		// 3- créer la requête
+					PreparedStatement ps = conn.prepareStatement("SELECT FROM Client where id_conseiller = idConseiller");
+					// 4- executer la requête
+					ResultSet rs = ps.executeQuery();
+					// 5- présenter les résultats
+					while (rs.next()) {
+						Client c = new Client();
+						c.setIdClient(rs.getInt("id_client"));
+						c.setNom(rs.getString("nom"));
+						c.setPrenom(rs.getString("prenom"));
+						c.setAdresse(rs.getString("adresse"));
+						c.setCodePostal(rs.getString("code_postal"));
+						c.setVille(rs.getString("ville"));
+						c.setTelephone(rs.getString("telephone"));
+						c.setEntreprise(rs.getBoolean("entreprise"));
+						c.setNomEntreprise(rs.getString("nom_entreprise"));
+						c.setEmail(rs.getString("email"));
+						
+						
+						clients.add(c);
+					}
+					// 6- fermer la connexion
+					conn.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					// code qui est executé quelque soit les étapes précédentes
+				}
+				return clients;
+			}
 
 }
