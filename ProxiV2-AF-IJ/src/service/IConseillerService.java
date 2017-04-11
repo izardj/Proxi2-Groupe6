@@ -42,16 +42,7 @@ public interface IConseillerService {
 	public void modifierClient(Conseiller conseiller, Client client, String nom, String prenom, String email,
 			String adresse, String codePostal, String ville, String telephone);
 
-	/**
-	 * methode qui retourne un client pour l'afficher
-	 * 
-	 * @param conseiller
-	 *            conseiller qui demande
-	 * @param client
-	 *            client a afficher
-	 * @return
-	 */
-	public Client afficherClient(Conseiller conseiller, Client client);
+	public Client afficherClient(Conseiller conseiller, int id);
 
 	/**
 	 * Methode qui permet de realiser des virement de compte a compte

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import metier.Client;
 import metier.Conseiller;
 import service.ILoginService;
+import service.Services;
 
 /**
  * Servlet implementation class LoginServlet
@@ -41,12 +42,11 @@ public class LoginServlet extends HttpServlet {
 
 		// 2- Traitement avec la couche service
 		// TODO utiliser la couche service pour identifier client plutot qu'en dur
-		//ILoginService ls = new Service();
-		//Conseiller conseiller = ls.verificationLogin(login, pwd);
+		ILoginService ls = new Services();
+		Conseiller conseiller = ls.verificationLogin(login, pwd);
 		
 		// verifie si le conseiller existe
-		// conseiller.getId() == null
-		if (login.equals("toto") && pwd.equals("titi")) {
+		if (conseiller.getIdConseiller() == 0) {
 			// 4 Envoi vers la JSP qui liste les clients
 			request.getRequestDispatcher("/listerClients.jsp").forward(request, response);
 		} else {

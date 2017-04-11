@@ -2,6 +2,7 @@ package service;
 
 import java.util.Collection;
 
+import dao.Dao;
 import dao.IDao;
 import metier.Client;
 import metier.Compte;
@@ -21,7 +22,7 @@ public class Services implements IConseillerService, ILoginService {
 
 	@Override
 	public Collection<Client> listerClients(Conseiller conseiller) {
-		return iDao.listerClientParConseiller(conseiller.getIdConseiller());
+		return iDao.listerClientsParConseiller(conseiller.getIdConseiller());
 	}
 
 	@Override
@@ -41,12 +42,12 @@ public class Services implements IConseillerService, ILoginService {
 	}
 
 	@Override
-	public Client afficherClient(Conseiller conseiller, Client client) {
-		if (client.getConseiller().equals(conseiller)) {
-			return iDao.retourneClientParId(client.getIdClient());
-
-		}
-
+	public Client afficherClient(Conseiller conseiller, int id) {
+		/*
+		 * if (client.getConseiller().equals(conseiller)) { return
+		 * iDao.retourneClientParId(client.getIdClient()); }
+		 */
+		return iDao.retourneClientParId(id);
 	}
 
 	/**
@@ -113,27 +114,21 @@ public class Services implements IConseillerService, ILoginService {
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte compteDeb,
 			double montant) {
 		if (client.getConseiller().equals(conseiller)) {
-			double s = compteDeb.getSolde();
+
 			compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde());
 			// debite un compte et verification que le debit a eu lieu
-			if (iDao.modifierSoldeCompte(compteDeb)==1) {
+			if (iDao.modifierSoldeCompte(compteDeb) == 1) {
 				compteCred.setSolde(crediterCompte(compteCred, montant).getSolde());
 				// credite un compte
-				if (iDao.modifierSoldeCompte(compteCred)==1){
+				if (iDao.modifierSoldeCompte(compteCred) == 1) {
 					return true;
-				}
-				else{
+				} else {
 					return false;
 				}
-					
 
 			}
-
-			
 		}
-		else{
-			return false;
-		}
+		return false;
 	}
 
 	// pas prioritaire
