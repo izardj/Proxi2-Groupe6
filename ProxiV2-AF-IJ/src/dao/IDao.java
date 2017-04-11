@@ -13,10 +13,10 @@ public interface IDao {
 	public void modifierClient(Client client);
 	public Client returnClientParId(int IdClient);
 	/**
-	 * Met à jour un Compte
+	 * Met à jour le solde de compte
 	 * @param compte Le compte à modifier
-	 * @return true si la modification à eu lieu
+	 * @return 1 en cas de succès ou 0 si le compte n'a pas été modifié
 	 */
-	public boolean modifierCompte(Compte compte);
+	public int modifierSoldeCompte(Compte compte);
 	
 }
