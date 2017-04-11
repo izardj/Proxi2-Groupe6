@@ -1,7 +1,8 @@
 package metier;
 
 public abstract class Compte {
-
+	
+	private int idCompte;
 	private int numeroCompte;
 	private double solde;
 	private long dateOuverture;

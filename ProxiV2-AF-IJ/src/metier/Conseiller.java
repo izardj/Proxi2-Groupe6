@@ -5,6 +5,7 @@ import java.util.Collection;
 
 public class Conseiller extends Personne {
 
+	private int idConseiller
 	private String login;
 	private String pwd;
 
