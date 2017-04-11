@@ -37,7 +37,7 @@
 					Connecté en tant que
 					<c:out value="${conseiller.nom}" />
 				</p>
-				
+
 			</div>
 			<!--/.nav-collapse -->
 		</div>
@@ -61,6 +61,13 @@
 				<c:forEach var="c" items="${client.comptes}">
 					<li>
 						<ul>
+							<!-- determiner le type de class fille -->
+							<c:if test="${c['class'].simpleName == 'CompteCourant'}">
+								<li>Compte Courant</li>
+							</c:if>
+							<c:if test="${c['class'].simpleName == 'CompteEpargne'}">
+								<li>Compte Epargne</li>
+							</c:if>
 							<li>Numéro : <c:out value="${c.numeroCompte}" /></li>
 							<li>Solde : <c:out value="${c.solde}" /></li>
 							<li>Date ouverture : <c:out value="${c.dateOuverture}" /></li>
