@@ -59,10 +59,7 @@ public class Dao implements IDao {
 
 			// 6- fermer la connexion
 			conn.close();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -71,7 +68,7 @@ public class Dao implements IDao {
 
 	}
 
-	}
+	
 
 	@Override
 	public int modifierConseiller(Conseiller conseiller) {
