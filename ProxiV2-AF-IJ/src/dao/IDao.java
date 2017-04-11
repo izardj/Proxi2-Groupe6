@@ -12,6 +12,11 @@ public interface IDao {
 	public Collection<Client> listerClientParConseiller(int idConseiller);
 	public void modifierClient(Client client);
 	public Client returnClientParId(int IdClient);
-	public boolean virement(Compte compteCred,Compte compteDeb);
+	/**
+	 * Met à jour un Compte
+	 * @param compte Le compte à modifier
+	 * @return true si la modification à eu lieu
+	 */
+	public boolean modifierCompte(Compte compte);
 	
 }
