@@ -33,11 +33,11 @@ public abstract class Compte {
 		this.solde = solde;
 	}
 
-	public long getDateOuverture() {
+	public String getDateOuverture() {
 		return dateOuverture;
 	}
 
-	public void setDateOuverture(long dateOuverture) {
+	public void setDateOuverture(String dateOuverture) {
 		this.dateOuverture = dateOuverture;
 	}
 
@@ -57,7 +57,7 @@ public abstract class Compte {
 		this.carteBancaire = carteBancaire;
 	}
 
-	public Compte(int numeroCompte, double solde, long dateOuverture, Client client, CarteBancaire carteBancaire) {
+	public Compte(int numeroCompte, double solde, String dateOuverture, Client client, CarteBancaire carteBancaire) {
 		super();
 		this.numeroCompte = numeroCompte;
 		this.solde = solde;
