@@ -5,9 +5,17 @@ import java.util.Collection;
 
 public class Conseiller extends Personne {
 
-	private int idConseiller
+	private int idConseiller;
 	private String login;
 	private String pwd;
+
+	public int getIdConseiller() {
+		return idConseiller;
+	}
+
+	public void setIdConseiller(int idConseiller) {
+		this.idConseiller = idConseiller;
+	}
 
 	public String getLogin() {
 		return login;

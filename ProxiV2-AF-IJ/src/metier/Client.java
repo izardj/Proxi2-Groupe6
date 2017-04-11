@@ -11,6 +11,14 @@ public abstract class Client extends Personne {
 	private Collection<Placement> placements = new ArrayList<Placement>();
 	private Conseiller conseiller;
 
+	public int getIdClient() {
+		return idClient;
+	}
+
+	public void setIdClient(int idClient) {
+		this.idClient = idClient;
+	}
+
 	public boolean isEntreprise() {
 		return entreprise;
 	}

@@ -1,13 +1,21 @@
 package metier;
 
 public abstract class Compte {
-	
+
 	private int idCompte;
 	private int numeroCompte;
 	private double solde;
 	private long dateOuverture;
 	private Client client;
 	private CarteBancaire carteBancaire;
+
+	public int getIdCompte() {
+		return idCompte;
+	}
+
+	public void setIdCompte(int idCompte) {
+		this.idCompte = idCompte;
+	}
 
 	public int getNumeroCompte() {
 		return numeroCompte;
