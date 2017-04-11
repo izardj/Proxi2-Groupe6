@@ -11,30 +11,6 @@ import metier.Conseiller;
 public class Dao implements IDao {
 
 	@Override
-	public Conseiller verificationLogin(String login, String pwd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<Client> listerClientParConseiller(int idConseiller) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void modifierClient(Client client) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Client returnClientParId(int IdClient) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int modifierSoldeCompte(Compte compte) {
 		int row = 0;
 		try {
@@ -54,6 +30,84 @@ public class Dao implements IDao {
 			DaoConnexion.closeConnexion();
 		}
 		return row;
+	}
+
+	@Override
+	public int creerConseiller(Conseiller conseiller) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int modifierConseiller(Conseiller conseiller) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Conseiller verificationLogin(String login, String pwd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int supprimerConseiller(Conseiller conseiller) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int creerCompte(Compte compte) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int modifierCompte(Compte compte) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Compte getCompteParId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int supprimerCompte(Compte compte) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int creerClient(Client client) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int modifierClient(Client client) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int supprimerClient(Client client) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Client retourneClientParId(int IdClient) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<Client> listerClientsParConseiller(int idConseiller) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -43,7 +43,7 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public Client afficherClient(Conseiller conseiller, Client client) {
 		if (client.getConseiller().equals(conseiller)) {
-			return iDao.returnClientParId(client.getIdClient());
+			return iDao.retourneClientParId(client.getIdClient());
 
 		}
 
