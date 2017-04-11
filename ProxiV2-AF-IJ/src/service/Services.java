@@ -15,7 +15,7 @@ public class Services implements IConseillerService, ILoginService {
 
 	@Override
 	public Conseiller verificationLogin(String login, String pwd) {
-		
+
 		return iDao.verificationLogin(login, pwd);
 	}
 
@@ -48,7 +48,7 @@ public class Services implements IConseillerService, ILoginService {
 		}
 
 	}
-	
+
 	/**
 	 * Methode permettant de crediter un compte
 	 * 
@@ -78,29 +78,28 @@ public class Services implements IConseillerService, ILoginService {
 	 * @return retourne le compte
 	 */
 	public Compte debiterCompte(Compte c, double montant) {
-		
-		
-// si compte Courant (avec decouvert)
+
+		// si compte Courant (avec decouvert)
 		if (c instanceof CompteCourant) {
 			double solde = c.getSolde();
 			double decouvert = ((CompteCourant) c).getDecouvert();
 			if (montant >= 0) {
 				if (solde + decouvert >= montant) {
 					solde = solde - montant;
-					c.setSolde(solde); //debite le comptecourant
+					c.setSolde(solde); // debite le comptecourant
 				}
 
 			}
 			return c;
 
 		}
-// si compte Epargne (Sans decouvert)
+		// si compte Epargne (Sans decouvert)
 		if (c instanceof CompteEpargne) {
 			double solde = c.getSolde();
 			if (montant >= 0) {
 				if (solde >= montant) {
-					solde = solde - montant;  
-					c.setSolde(solde); //debite le compte Epargne
+					solde = solde - montant;
+					c.setSolde(solde); // debite le compte Epargne
 				}
 
 			}
@@ -110,28 +109,26 @@ public class Services implements IConseillerService, ILoginService {
 		return c;
 	}
 
-
 	@Override
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte compteDeb,
 			double montant) {
 		if (client.getConseiller().equals(conseiller)) {
 			double s = compteDeb.getSolde();
-			compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde()); // debite un compte
-			
-			// verification que le debit a eu lieu
-			if (s!=compteDeb.getSolde())
-			{
-			compteCred.setSolde(crediterCompte(compteCred, montant).getSolde()); // credite un compte
-			
-			
-			return iDao.virement(compteCred,compteDeb);
-		}
+			// debite un compte
+			iDao.modifierCompte(compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde()));
 
-		return false;
+			// verification que le debit a eu lieu
+			if (s != compteDeb.getSolde()) {
+				// credite un compte
+				iDao.modifierCompte(compteCred.setSolde(crediterCompte(compteCred, montant).getSolde()));
+
+			}
+
+			return false;
+		}
 	}
-	}
-		
-		// pas prioritaire
+
+	// pas prioritaire
 
 	@Override
 	public boolean creerClient(Conseiller conseiller, Client client) {
