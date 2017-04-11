@@ -37,7 +37,7 @@ public class Dao implements IDao {
 
 	@Override
 	public int creerConseiller(Conseiller conseiller) {
-		int i =0;
+		int i = 0;
 		try {
 
 			// 2- créer la connexion
@@ -59,7 +59,6 @@ public class Dao implements IDao {
 			i = ps.executeUpdate();
 			// 5- présenter les résultats
 
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,7 +66,7 @@ public class Dao implements IDao {
 			// code qui est executé quelque soit les étapes précédentes
 			// 6- fermer la connexion
 			DaoConnexion.closeConnexion();
-			
+
 		}
 		return i;
 
@@ -75,14 +74,15 @@ public class Dao implements IDao {
 
 	@Override
 	public int modifierConseiller(Conseiller conseiller) {
-		int i =0;
+		int i = 0;
 		try {
 
 			// 2- créer la connexion
 			Connection conn = DaoConnexion.getConnexion();
 			// 3- créer la requête
 
-			PreparedStatement ps = conn.prepareStatement("UPDATE client SET nom = ? , prenom = ?, adresse = ?,code_postal =?, ville = ?,telephone = ?,login = ?, pwd = ?, WHERE id_conseiller = ?");
+			PreparedStatement ps = conn.prepareStatement(
+					"UPDATE client SET nom = ? , prenom = ?, adresse = ?,code_postal =?, ville = ?,telephone = ?,login = ?, pwd = ?, WHERE id_conseiller = ?");
 			ps.setString(1, conseiller.getNom());
 			ps.setString(2, conseiller.getPrenom());
 			ps.setString(3, conseiller.getAdresse());
@@ -91,13 +91,12 @@ public class Dao implements IDao {
 			ps.setString(6, conseiller.getTelephone());
 			ps.setString(7, conseiller.getLogin());
 			ps.setString(8, conseiller.getPwd());
-			ps.setInt(9,conseiller.getIdConseiller());
+			ps.setInt(9, conseiller.getIdConseiller());
 
 			// 4- executer la requête
 			i = ps.executeUpdate();
 			// 5- présenter les résultats
 
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,12 +104,11 @@ public class Dao implements IDao {
 			// code qui est executé quelque soit les étapes précédentes
 			// 6- fermer la connexion
 			DaoConnexion.closeConnexion();
-			
+
 		}
 		return i;
 
 	}
-	
 
 	@Override
 	public Conseiller verificationLogin(String login, String pwd) {
@@ -199,46 +197,49 @@ public class Dao implements IDao {
 
 	@Override
 	public Client retourneClientParId(int IdClient) {
+
 		return null;
 	}
+
+	
 
 	@Override
 	public Collection<Client> listerClientsParConseiller(int idConseiller) {
 		Collection<Client> clients = new ArrayList<Client>();
 		try {
-		// creer la connexion
-					Connection conn = DaoConnexion.getConnexion();
+			// creer la connexion
+			Connection conn = DaoConnexion.getConnexion();
 
-		// 3- créer la requête
-					PreparedStatement ps = conn.prepareStatement("SELECT FROM Client where id_conseiller = idConseiller");
-					// 4- executer la requête
-					ResultSet rs = ps.executeQuery();
-					// 5- présenter les résultats
-					while (rs.next()) {
-						Client c = new Client();
-						c.setIdClient(rs.getInt("id_client"));
-						c.setNom(rs.getString("nom"));
-						c.setPrenom(rs.getString("prenom"));
-						c.setAdresse(rs.getString("adresse"));
-						c.setCodePostal(rs.getString("code_postal"));
-						c.setVille(rs.getString("ville"));
-						c.setTelephone(rs.getString("telephone"));
-						c.setEntreprise(rs.getBoolean("entreprise"));
-						c.setNomEntreprise(rs.getString("nom_entreprise"));
-						c.setEmail(rs.getString("email"));
-						
-						
-						clients.add(c);
-					}
-					// 6- fermer la connexion
-					conn.close();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					// code qui est executé quelque soit les étapes précédentes
-				}
-				return clients;
+			// 3- créer la requête
+			PreparedStatement ps = conn.prepareStatement("SELECT FROM Client where id_conseiller = ?");
+			ps.setInt(1, idConseiller);
+			// 4- executer la requête
+			ResultSet rs = ps.executeQuery();
+			// 5- présenter les résultats
+			while (rs.next()) {
+				Client c = new Client();
+				c.setIdClient(rs.getInt("id_client"));
+				c.setNom(rs.getString("nom"));
+				c.setPrenom(rs.getString("prenom"));
+				c.setAdresse(rs.getString("adresse"));
+				c.setCodePostal(rs.getString("code_postal"));
+				c.setVille(rs.getString("ville"));
+				c.setTelephone(rs.getString("telephone"));
+				c.setEntreprise(rs.getBoolean("entreprise"));
+				c.setNomEntreprise(rs.getString("nom_entreprise"));
+				c.setEmail(rs.getString("email"));
+
+				clients.add(c);
 			}
+			// 6- fermer la connexion
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// code qui est executé quelque soit les étapes précédentes
+		}
+		return clients;
+	}
 
 }
