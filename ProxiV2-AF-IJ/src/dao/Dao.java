@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -34,8 +35,42 @@ public class Dao implements IDao {
 
 	@Override
 	public int creerConseiller(Conseiller conseiller) {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+	
+			// 2- créer la connexion
+			Connection conn = DaoConnexion.getConnexion();
+			// 3- créer la requête
+
+			PreparedStatement ps = conn.prepareStatement(
+					"INSERT INTO Conseiller(nom, prenom, adresse, code_postal, ville, telephone,login,pwd) VALUES (?, ?, ?, ?,?,?,?,?)");
+			ps.setString(1, conseiller.getNom());
+			ps.setString(2, conseiller.getPrenom());
+			ps.setString(3, conseiller.getAdresse());
+			ps.setString(4, conseiller.getCodePostal());
+			ps.setString(5, conseiller.getVille());
+			ps.setString(6, conseiller.getTelephone());
+			ps.setString(7, conseiller.getLogin());
+			ps.setString(8, conseiller.getPwd());
+		
+
+			// 4- executer la requête
+			ps.executeUpdate();
+			// 5- présenter les résultats
+
+			// 6- fermer la connexion
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// code qui est executé quelque soit les étapes précédentes
+		}
+
+	}
+
 	}
 
 	@Override
