@@ -1,12 +1,13 @@
 package metier;
 
-public abstract class Personne{
+public abstract class Personne {
 	private String nom;
 	private String prenom;
 	private String adresse;
 	private String codePostal;
 	private String ville;
 	private String telephone;
+	private String email;
 
 	protected String getNom() {
 		return nom;
@@ -54,6 +55,14 @@ public abstract class Personne{
 
 	protected void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Personne() {
