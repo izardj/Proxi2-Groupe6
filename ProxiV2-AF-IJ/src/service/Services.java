@@ -21,13 +21,13 @@ public class Services implements IConseillerService, ILoginService {
 
 	@Override
 	public Collection<Client> listerClients(Conseiller conseiller) {
-		return iDaoClient.listerClientParConseiller(id_conseiller);
+		return iDaoClient.listerClientParConseiller(idConseiller);
 	}
 
 	@Override
 	public void modifierClient(Conseiller conseiller, Client client, String nom, String prenom, String email,
 			String adresse, String codePostal, String ville, String telephone) {
-		if (conseiller=client.getConseiller()){
+		if (client.getConseiller().equals(conseiller)){
 			client.setNom(nom);
 			client.setPrenom(prenom);
 			client.setEmail(email);
@@ -35,15 +35,18 @@ public class Services implements IConseillerService, ILoginService {
 			client.setCodePostal(codePostal);
 			client.setVille(ville);
 			client.setTelephone(telephone);
-			iDaoClient.modifierClient(Client client);
+			iDaoClient.modifierClient(client);
 		}
 		
 	}
 
 	@Override
 	public Client afficherClient(Conseiller conseiller, Client client) {
-		// TODO Auto-generated method stub
-		return null;
+		if (client.getConseiller().equals(conseiller)){
+			return iDaoClient.returnClientParId(client.getIdClient());
+			
+		}
+		
 	}
 
 	@Override
