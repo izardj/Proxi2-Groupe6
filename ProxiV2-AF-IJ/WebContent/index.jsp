@@ -14,11 +14,18 @@
 </head>
 <body>
 	<div class="container">
-		<c:if test="${not empty erreur}">
+	<!-- DEBUT MESSAGE -->
+		<c:if test="${not empty alertDanger}">
 			<div class="alert alert-danger" role="alert">
-				<c:out value="${erreur}" />
+				<c:out value="${alertDanger}" />
 			</div>
 		</c:if>
+		<c:if test="${not empty alertSuccess}">
+			<div class="alert alert-success" role="alert">
+				<c:out value="${alertSuccess}" />
+			</div>
+		</c:if>
+		<!-- FIN MESSAGE -->
 		<form class="form-signin" method="post" action="LoginServlet">
 			<h2 class="form-signin-heading">Veuillez vous identifier</h2>
 			<label for="login" class="sr-only">Login</label> <input type="text"
@@ -30,7 +37,7 @@
 		</form>
 	</div>
 	<!-- /container -->
-		<!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery.min.js"></script>

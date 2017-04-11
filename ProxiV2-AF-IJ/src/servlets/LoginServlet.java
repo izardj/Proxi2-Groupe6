@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// mdéfini l'encodage des paramètres en UTF-8
 		request.setCharacterEncoding("UTF-8");
-
+		
 		// 1- Récupération les paramètres
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
@@ -52,11 +52,11 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("conseiller", conseiller);
 			
-			// Envoi vers la JSP qui liste les clients
-			request.getRequestDispatcher("/ListerClients").forward(request, response);
+			// Redirige vers la servlet ListerClients
+			response.sendRedirect("ListerClients");
 		} else {
 			// 3- Préparation de l'envoi
-			request.setAttribute("erreur", "Echec identification conseiller, veuillez réessayer.");
+			request.setAttribute("alertDanger", "Echec identification conseiller, veuillez réessayer.");
 			// 4 Envoi vers la JSP d'identification
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}

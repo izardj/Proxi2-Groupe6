@@ -30,7 +30,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Lister clients</a></li>
 					<li>Test</li>
-					<li><a href="LoginServlet?action=logout">Se deconnecter</a></li>
+					<li><a href="LogoutServlet">Se deconnecter</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -56,6 +56,7 @@
 									<th>CODE POSTAL</th>
 									<th>TELEPHONE</th>
 									<th>EMAIL</th>
+									<th>ACTION</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -70,6 +71,7 @@
 										<td><c:out value="${c.codePostal}"></c:out></td>
 										<td><c:out value="${c.telephone}"></c:out></td>
 										<td><c:out value="${c.email}"></c:out></td>
+										<td><a href="AfficherClient?id=<c:out value='${c.idClient}' />" >Afficher</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
