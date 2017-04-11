@@ -36,6 +36,7 @@ public class Dao implements IDao {
 
 	@Override
 	public int creerConseiller(Conseiller conseiller) {
+		int i =0;
 		try {
 
 			// 2- créer la connexion
@@ -54,17 +55,20 @@ public class Dao implements IDao {
 			ps.setString(8, conseiller.getPwd());
 
 			// 4- executer la requête
-			ps.executeUpdate();
+			i = ps.executeUpdate();
 			// 5- présenter les résultats
 
-			// 6- fermer la connexion
-			conn.close();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			// code qui est executé quelque soit les étapes précédentes
+			// 6- fermer la connexion
+			DaoConnexion.closeConnexion();
+			
 		}
+		return i;
 
 	}
 
