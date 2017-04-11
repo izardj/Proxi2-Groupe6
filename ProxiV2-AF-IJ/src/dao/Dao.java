@@ -196,7 +196,7 @@ public class Dao implements IDao {
 	}
 
 	@Override
-	public Client retourneClientParId(int IdClient) {
+	public Client retourneClientParId(int idClient) {
 		return null;
 	}
 

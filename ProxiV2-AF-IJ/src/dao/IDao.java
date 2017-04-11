@@ -32,7 +32,7 @@ public interface IDao {
 
 	public int supprimerClient(Client client);
 
-	public Client retourneClientParId(int IdClient);
+	public Client retourneClientParId(int idClient);
 
 	public Collection<Client> listerClientsParConseiller(int idConseiller);
 
