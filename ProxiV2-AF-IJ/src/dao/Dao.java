@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -36,7 +37,7 @@ public class Dao implements IDao {
 	@Override
 	public int creerConseiller(Conseiller conseiller) {
 		try {
-	
+
 			// 2- créer la connexion
 			Connection conn = DaoConnexion.getConnexion();
 			// 3- créer la requête
@@ -51,7 +52,6 @@ public class Dao implements IDao {
 			ps.setString(6, conseiller.getTelephone());
 			ps.setString(7, conseiller.getLogin());
 			ps.setString(8, conseiller.getPwd());
-		
 
 			// 4- executer la requête
 			ps.executeUpdate();
@@ -68,8 +68,6 @@ public class Dao implements IDao {
 
 	}
 
-	
-
 	@Override
 	public int modifierConseiller(Conseiller conseiller) {
 		// TODO Auto-generated method stub
@@ -78,8 +76,39 @@ public class Dao implements IDao {
 
 	@Override
 	public Conseiller verificationLogin(String login, String pwd) {
-		// TODO Auto-generated method stub
-		return null;
+		Conseiller c = new Conseiller();
+		try {
+			// creer la connexion
+			Connection conn = DaoConnexion.getConnexion();
+
+			// Créer la requête
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Conseiller WHERE login = ? AND pwd = ?");
+			ps.setString(1, login);
+			ps.setString(2, pwd);
+
+			// Exécuter la requête
+			ResultSet rs = ps.executeQuery();
+
+			// Présenter les résultats
+
+			if (rs.next()) {
+				c.setIdConseiller(rs.getInt("id_conseiller"));
+				c.setNom(rs.getString("nom"));
+				c.setPrenom(rs.getString("prenom"));
+				c.setAdresse(rs.getString("adresse"));
+				c.setCodePostal(rs.getString("code_postal"));
+				c.setVille(rs.getString("ville"));
+				c.setLogin(rs.getString("login"));
+				c.setPwd(rs.getString("pwd"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// Fermer la connexion
+			DaoConnexion.closeConnexion();
+		}
+		return c;
 	}
 
 	@Override
