@@ -9,6 +9,8 @@ import java.util.Collection;
 
 import metier.Client;
 import metier.Compte;
+import metier.CompteCourant;
+import metier.CompteEpargne;
 import metier.Conseiller;
 
 public class Dao implements IDao {
@@ -197,7 +199,70 @@ public class Dao implements IDao {
 
 	@Override
 	public Client retourneClientParId(int idClient) {
-		return null;
+		Client c = new Client();
+		try {
+			// creer la connexion
+			Connection conn = DaoConnexion.getConnexion();
+
+			// 3- créer la requête
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Client where id_client = ?");
+			ps.setInt(1, idClient);
+			// 4- executer la requête
+			ResultSet rs = ps.executeQuery();
+			// 5- présenter les résultats
+			
+				
+				c.setIdClient(rs.getInt("id_client"));
+				c.setNom(rs.getString("nom"));
+				c.setPrenom(rs.getString("prenom"));
+				c.setAdresse(rs.getString("adresse"));
+				c.setCodePostal(rs.getString("code_postal"));
+				c.setVille(rs.getString("ville"));
+				c.setTelephone(rs.getString("telephone"));
+				c.setEntreprise(rs.getBoolean("entreprise"));
+				c.setNomEntreprise(rs.getString("nom_entreprise"));
+				c.setEmail(rs.getString("email"));
+				// 3- créer la requête
+				PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Compte where id_client = ?");
+				ps2.setInt(1, idClient);
+				Collection<Compte> comptes = new ArrayList<Compte>();
+				ResultSet rs2 = ps2.executeQuery();
+				while (rs2.next()) {
+					String typeCompte = rs2.getString("type_compte");
+					if(typeCompte.equals("CompteCourant")){
+					CompteCourant cc = new CompteCourant();
+					cc.setIdCompte(rs2.getInt("id_compte"));
+					cc.setNumeroCompte(rs2.getInt("num_compte"));
+					cc.setSolde(rs2.getDouble("solde"));
+					cc.setDateOuverture(rs2.getString("date_ouverture"));
+					cc.setDecouvert(rs.getDouble("decouvert"));
+					comptes.add(cc);
+					}
+					else{
+						CompteEpargne ce = new CompteEpargne();
+						ce.setIdCompte(rs2.getInt("id_compte"));
+						ce.setNumeroCompte(rs2.getInt("num_compte"));
+						ce.setSolde(rs2.getDouble("solde"));
+						ce.setDateOuverture(rs2.getString("date_ouverture"));
+						ce.setRemuneration(rs.getDouble("renumeration"));
+						comptes.add(ce);
+						
+					}
+					c.setComptes(comptes);
+					
+				
+
+				
+			}
+			// 6- fermer la connexion
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// code qui est executé quelque soit les étapes précédentes
+		}
+		return c;
 	}
 
 	
