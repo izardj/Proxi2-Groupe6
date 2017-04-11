@@ -12,7 +12,7 @@ public class CompteEpargne extends Compte {
 		this.remuneration = remuneration;
 	}
 
-	public CompteEpargne(int numeroCompte, double solde, long dateOuverture, Client client, CarteBancaire carteBancaire,
+	public CompteEpargne(int numeroCompte, double solde, String dateOuverture, Client client, CarteBancaire carteBancaire,
 			double remuneration) {
 		super(numeroCompte, solde, dateOuverture, client, carteBancaire);
 		this.remuneration = remuneration;
