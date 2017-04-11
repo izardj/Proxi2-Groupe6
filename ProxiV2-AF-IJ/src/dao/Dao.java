@@ -199,7 +199,6 @@ public class Dao implements IDao {
 
 	@Override
 	public Client retourneClientParId(int IdClient) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -211,7 +210,7 @@ public class Dao implements IDao {
 					Connection conn = DaoConnexion.getConnexion();
 
 		// 3- créer la requête
-					PreparedStatement ps = conn.prepareStatement("SELECT * FROM Client");
+					PreparedStatement ps = conn.prepareStatement("SELECT FROM Client where id_conseiller = idConseiller");
 					// 4- executer la requête
 					ResultSet rs = ps.executeQuery();
 					// 5- présenter les résultats
