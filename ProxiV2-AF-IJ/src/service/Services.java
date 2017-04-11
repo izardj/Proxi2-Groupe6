@@ -114,16 +114,24 @@ public class Services implements IConseillerService, ILoginService {
 			double montant) {
 		if (client.getConseiller().equals(conseiller)) {
 			double s = compteDeb.getSolde();
-			// debite un compte
-			iDao.modifierCompte(compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde()));
-
-			// verification que le debit a eu lieu
-			if (s != compteDeb.getSolde()) {
+			compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde());
+			// debite un compte et verification que le debit a eu lieu
+			if (iDao.modifierSoldeCompte(compteDeb)==1) {
+				compteCred.setSolde(crediterCompte(compteCred, montant).getSolde());
 				// credite un compte
-				iDao.modifierCompte(compteCred.setSolde(crediterCompte(compteCred, montant).getSolde()));
+				if (iDao.modifierSoldeCompte(compteCred)==1){
+					return true;
+				}
+				else{
+					return false;
+				}
+					
 
 			}
 
+			
+		}
+		else{
 			return false;
 		}
 	}
