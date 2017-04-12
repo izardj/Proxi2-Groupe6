@@ -27,7 +27,7 @@ public class Dao implements IDao {
 
 			// executer la requête
 			ResultSet rs = ps.executeQuery();
-			
+
 			// présenter les résultats
 			while (rs.next()) {
 				String typeCompte = rs.getString("type_compte");
@@ -423,6 +423,43 @@ public class Dao implements IDao {
 			DaoConnexion.closeConnexion();
 		}
 		return clients;
+	}
+
+	@Override
+	public Conseiller afficherConseiller(int idConseiller) {
+		Conseiller c = new Conseiller();
+		try {
+			// creer la connexion
+			Connection conn = DaoConnexion.getConnexion();
+
+			// 3- créer la requête
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Conseiller where id_conseiller = ?");
+			ps.setInt(1, idConseiller);
+
+			// 4- executer la requête
+			ResultSet rs = ps.executeQuery();
+
+			// 5- présenter les résultats
+			if (rs.next()) {
+				c.setIdConseiller(rs.getInt("id_conseiller"));
+				c.setNom(rs.getString("nom"));
+				c.setPrenom(rs.getString("prenom"));
+				c.setAdresse(rs.getString("adresse"));
+				c.setCodePostal(rs.getString("code_postal"));
+				c.setVille(rs.getString("ville"));
+				c.setTelephone(rs.getString("telephone"));
+				c.setLogin(rs.getString("login"));
+				c.setPwd(rs.getString("pwd"));
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// code qui est executé quelque soit les étapes précédentes
+			DaoConnexion.closeConnexion();
+		}
+		return c;
 	}
 
 }

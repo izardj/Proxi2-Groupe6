@@ -40,7 +40,9 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public void modifierClient(Conseiller conseiller, Client client, String nom, String prenom, String email,
 			String adresse, String codePostal, String ville, String telephone) {
-		if (client.getConseiller().equals(conseiller)) {
+		Collection <Client> clients= iDao.listerClientsParConseiller(conseiller.getIdConseiller());
+		if (clients.contains(client)) {
+			client.setConseiller(conseiller);
 			client.setNom(nom);
 			client.setPrenom(prenom);
 			client.setEmail(email);
@@ -56,16 +58,14 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public Client afficherClient(Conseiller conseiller, int id) {
 		Client c = iDao.retourneClientParId(id);
-		
-		 if (c.getConseiller().equals(conseiller)) {
-			 return c;
-			  }
-		 else{
-			 return new Client();
-		 }
-		
-		
-	
+		Collection <Client> clients= iDao.listerClientsParConseiller(conseiller.getIdConseiller());
+		if (clients.contains(c)) {
+			c.setConseiller(conseiller);
+			return c;
+		} else {
+			return new Client();
+		}
+
 	}
 
 	/**
@@ -135,10 +135,10 @@ public class Services implements IConseillerService, ILoginService {
 
 			compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde());
 			// debite un compte et verification que le debit a eu lieu
-			if (iDao.modifierCompte(compteDeb) == 3) {
+			if (iDao.modifierCompte(compteDeb) == 1) {
 				compteCred.setSolde(crediterCompte(compteCred, montant).getSolde());
 				// credite un compte
-				if (iDao.modifierCompte(compteCred) == 3) {
+				if (iDao.modifierCompte(compteCred) == 1) {
 					return true;
 				} else {
 					return false;
@@ -161,6 +161,11 @@ public class Services implements IConseillerService, ILoginService {
 	public void supprimerClient(Conseiller conseiller, Client client) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Conseiller afficherConseiller(int idConseiller) {
+		return iDao.afficherConseiller(idConseiller);
 	}
 
 }

@@ -8,6 +8,20 @@ import metier.Conseiller;
 
 public interface IConseillerService {
 
+	// pas prioritaire
+	/**
+	 * creer un nouveau client
+	 * 
+	 * @param conseiller
+	 *            conseiller qui creer le client
+	 * @param client
+	 *            client a créer
+	 * @return
+	 */
+	public boolean creerClient(Conseiller conseiller, Client client);
+
+	public Conseiller afficherConseiller(int idConseiller);
+
 	/**
 	 * renvoie la liste de client d'un conseiller
 	 * 
@@ -62,18 +76,6 @@ public interface IConseillerService {
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte comptedeb,
 			double montant);
 
-	// pas prioritaire
-	/**
-	 * creer un nouveau client
-	 * 
-	 * @param conseiller
-	 *            conseiller qui creer le client
-	 * @param client
-	 *            client a créer
-	 * @return
-	 */
-	public boolean creerClient(Conseiller conseiller, Client client);
-
 	/**
 	 * supprime un client
 	 * 
@@ -97,5 +99,4 @@ public interface IConseillerService {
 	 * @return La collection de tous les comptes sauf le compte donné
 	 */
 	public Collection<Compte> recupererAutresComptes(Compte compte);
-
 }

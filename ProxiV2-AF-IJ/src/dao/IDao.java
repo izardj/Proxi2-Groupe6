@@ -39,5 +39,7 @@ public interface IDao {
 	 * @return une collection de compte
 	 */
 	public Collection<Compte> listerComptes();
+	
+	public Conseiller afficherConseiller(int idConseiller);
 
 }
