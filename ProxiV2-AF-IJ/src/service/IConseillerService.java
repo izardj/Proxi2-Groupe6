@@ -19,7 +19,11 @@ public interface IConseillerService {
 	 * @return
 	 */
 	public boolean creerClient(Conseiller conseiller, Client client);
-
+	/**
+	 * Retourne le conseiller corespondant a l'idConseiller
+	 * @param idConseiller identifiant du conseiller a retourner
+	 * @return
+	 */
 	public Conseiller afficherConseiller(int idConseiller);
 
 	/**
@@ -47,7 +51,12 @@ public interface IConseillerService {
 	 */
 	public boolean modifierClient(Conseiller conseiller, int idClient, String nom, String prenom, String email,
 			String adresse, String codePostal, String ville, String telephone);
-
+/**
+ * retourne le client correspondant a l'id si le conseiller qui le demande est sont conseiller
+ * @param conseiller conseiller qui demande le client
+ * @param id identifiant du client a retourner
+ * @return
+ */
 	public Client afficherClient(Conseiller conseiller, int id);
 
 	/**
