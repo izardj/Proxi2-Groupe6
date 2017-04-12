@@ -16,6 +16,22 @@ public class Client extends Personne {
 	public Client() {
 		super();
 	}
+	
+	
+
+	public Client(String nom, String prenom, String adresse, String codePostal, String ville, String telephone,
+			int idClient, boolean entreprise, String nomEntreprise, Collection<Compte> comptes,
+			Collection<Placement> placements, Conseiller conseiller) {
+		super(nom, prenom, adresse, codePostal, ville, telephone);
+		this.idClient = idClient;
+		this.entreprise = entreprise;
+		this.nomEntreprise = nomEntreprise;
+		this.comptes = comptes;
+		this.placements = placements;
+		this.conseiller = conseiller;
+	}
+
+
 
 	public int getIdClient() {
 		return idClient;
