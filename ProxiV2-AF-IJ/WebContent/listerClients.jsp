@@ -56,7 +56,7 @@
 								<th>NOM</th>
 								<th>PRENOM</th>
 								<th>NOM ENTREPRISE</th>
-								<th>ACTION</th>
+								<th>ACTIONS</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -67,7 +67,9 @@
 									<td><c:out value="${c.prenom}"></c:out></td>
 									<td><c:out value="${c.nomEntreprise}"></c:out></td>
 									<td><a class="btn btn-default"
-										href="AfficherClient?id=<c:out value='${c.idClient}' />">Afficher</a></td>
+										href="AfficherClient?id=<c:out value='${c.idClient}' />">Afficher</a><a
+										class="btn btn-default"
+										href="AfficherClient?action=modifier&id=<c:out value='${c.idClient}' />">Modifier</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

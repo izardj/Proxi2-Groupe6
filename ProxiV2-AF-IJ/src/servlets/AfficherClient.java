@@ -48,8 +48,14 @@ public class AfficherClient extends HttpServlet {
 
 			Client client = service.afficherClient(conseiller, id);
 			request.setAttribute("client", client);
-
-			request.getRequestDispatcher("/afficherClient.jsp").forward(request, response);
+			
+			// par defaut on affiche le client
+			if(request.getParameter("action") == null || !request.getParameter("action").equals("modifier")){
+				request.getRequestDispatcher("/afficherClient.jsp").forward(request, response);
+			}
+			else{
+				request.getRequestDispatcher("/modifierClient.jsp").forward(request, response);
+			}
 		} else {
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
