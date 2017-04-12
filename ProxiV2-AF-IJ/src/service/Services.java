@@ -41,8 +41,9 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public void modifierClient(Conseiller conseiller, Client client, String nom, String prenom, String email,
 			String adresse, String codePostal, String ville, String telephone) {
-		Collection <Client> clients= iDao.listerClientsParConseiller(conseiller.getIdConseiller());
-		if (clients.contains(client)) {
+			Collection <Client> clients= iDao.listerClientsParConseiller(conseiller.getIdConseiller());
+			for (Client c : clients) {
+			if(client.getIdClient() == c.getIdClient()){
 			client.setConseiller(conseiller);
 			client.setNom(nom);
 			client.setPrenom(prenom);
@@ -55,13 +56,14 @@ public class Services implements IConseillerService, ILoginService {
 		}
 
 	}
+	}
 
 	@Override
 	public Client afficherClient(Conseiller conseiller, int id) {
 		Client c = iDao.retourneClientParId(id);
-		Collection <Client> clients= iDao.listerClientsParConseiller(conseiller.getIdConseiller());
+		Collection<Client> clients = iDao.listerClientsParConseiller(conseiller.getIdConseiller());
 		for (Client client : clients) {
-			if(client.getIdClient() == c.getIdClient()){
+			if (client.getIdClient() == c.getIdClient()) {
 				c.setConseiller(conseiller);
 				return c;
 			}
