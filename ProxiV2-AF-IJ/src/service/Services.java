@@ -130,24 +130,26 @@ public class Services implements IConseillerService, ILoginService {
 
 		return c;
 	}
+	
 
 	@Override
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte compteDeb,
 			double montant) {
+		int i = 0;
 		if (client.getConseiller().getIdConseiller()==conseiller.getIdConseiller()) {
 
-			compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde());
-			// debite un compte et verification que le debit a eu lieu
-			if (iDao.modifierCompte(compteDeb) == 1) {
-				compteCred.setSolde(crediterCompte(compteCred, montant).getSolde());
-				// credite un compte
-				if (iDao.modifierCompte(compteCred) == 1) {
-					return true;
-				} else {
-					return false;
-				}
-
+			double s = compteDeb.getSolde();
+			compteDeb =debiterCompte(compteDeb, montant); // debite un compte
+			// verification que le debit a eu lieu
+			if (s!=compteDeb.getSolde())
+			{
+				i += iDao.modifierCompte(compteDeb);
+			compteCred = crediterCompte(compteCred, montant); // credite un compte
+				i += iDao.modifierCompte(compteCred);
+			
 			}
+
+		
 		}
 		return false;
 	}
