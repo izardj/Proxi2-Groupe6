@@ -175,8 +175,55 @@ public class Dao implements IDao {
 
 	@Override
 	public Compte getCompteParId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String typeCompte;
+		CompteEpargne ce = new CompteEpargne();
+		CompteCourant cc = new CompteCourant();
+		try {
+			// creer la connexion
+			Connection conn = DaoConnexion.getConnexion();
+
+			// 3- créer la requête
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Compte where id_compte = ?");
+			ps.setInt(1, id);
+			// 4- executer la requête
+			ResultSet rs = ps.executeQuery();
+			
+			// 5- présenter les résultats
+				rs.next();
+				typeCompte = rs.getString("type_compte");
+				
+				if (typeCompte.equals("CompteCourant")) {
+					cc.setIdCompte(rs.getInt("id_compte"));
+					cc.setNumeroCompte(rs.getInt("num_compte"));
+					cc.setSolde(rs.getDouble("solde"));
+					cc.setDateOuverture(rs.getString("date_ouverture"));
+					cc.setDecouvert(rs.getDouble("decouvert"));
+					
+				} else {
+					ce.setIdCompte(rs.getInt("id_compte"));
+					ce.setNumeroCompte(rs.getInt("num_compte"));
+					ce.setSolde(rs.getDouble("solde"));
+					ce.setDateOuverture(rs.getString("date_ouverture"));
+					ce.setRemuneration(rs.getDouble("remuneration"));
+					;
+
+				}
+				if (typeCompte.equals("CompteCourant")) {
+					return (Compte) cc;
+				} else {
+				
+					return (Compte) ce;
+				}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// code qui est executé quelque soit les étapes précédentes
+			DaoConnexion.closeConnexion();
+		}
+		return cc;
 	}
 
 	@Override
