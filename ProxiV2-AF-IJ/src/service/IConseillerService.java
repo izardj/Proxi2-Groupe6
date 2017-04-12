@@ -24,7 +24,7 @@ public interface IConseillerService {
 	 *            conseiller qui demande le client
 	 * @param id
 	 *            identifiant du client a retourner
-	 * @returnretourne le client correspondantFs
+	 * @return retourne le client correspondantFs
 	 */
 	public Client afficherClient(Conseiller conseiller, int id);
 
@@ -67,7 +67,7 @@ public interface IConseillerService {
 	 *            Compte a crediter
 	 * @param montant
 	 *            Compte a debiter
-	 * @return
+	 * @return vrai si le virement a été effectué faux dans le cas contraire
 	 */
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte comptedeb,
 			double montant);
