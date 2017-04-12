@@ -38,13 +38,15 @@ public class Virement extends HttpServlet {
 		
 		// verifier session
 		if(request.isRequestedSessionIdValid()){			
-			int id = Integer.parseInt(request.getParameter("id"));
+			int idCompte = Integer.parseInt(request.getParameter("id"));
+			int idClient = Integer.parseInt(request.getParameter("idclient"));
 			
-			Compte compteDebiteur = service.recupererCompteParId(id);
+			Compte compteDebiteur = service.recupererCompteParId(idCompte);
 			Collection<Compte> autresComptes = service.recupererAutresComptes(compteDebiteur);
 			
 			request.setAttribute("compteDebiteur", compteDebiteur);
 			request.setAttribute("autresComptes", autresComptes);
+			request.setAttribute("idclient", idClient);
 			
 			request.getRequestDispatcher("/virement.jsp").forward(request, response);
 		}
