@@ -79,7 +79,7 @@
 						de compte :</label>
 					<div class="col-sm-10">
 						<select class="form-control" id="comptecrediteur"
-							name="idcomptecrediteur">
+							name="idcomptecrediteur" required>
 							<option value="" selected disabled>Choisissez un compte</option>
 							<c:forEach var="c" items="${autresComptes}">
 								<option value="<c:out value='${c.idCompte}' />"><c:out
@@ -93,7 +93,7 @@
 					<label for="montant" class="col-sm-2 control-label">Montant</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="montant"
-							placeholder="Montant" name="montant" />
+							placeholder="Montant" name="montant" required/>
 					</div>
 				</div>
 				<div class="form-group">
