@@ -15,6 +15,18 @@ public class Services implements IConseillerService, ILoginService {
 	private IDao iDao = new Dao();
 
 	@Override
+	public Compte recupererCompteParId(int id) {
+		return iDao.getCompteParId(id);
+	}
+
+	@Override
+	public Collection<Compte> recupererAutresComptes(Compte compte) {
+		Collection<Compte> comptes = iDao.listerComptes();
+		comptes.remove(compte);
+		return comptes;
+	}
+
+	@Override
 	public Conseiller verificationLogin(String login, String pwd) {
 
 		return iDao.verificationLogin(login, pwd);

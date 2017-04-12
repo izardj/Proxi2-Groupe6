@@ -56,11 +56,6 @@
 								<th>NOM</th>
 								<th>PRENOM</th>
 								<th>NOM ENTREPRISE</th>
-								<th>ADRESSE</th>
-								<th>VILLE</th>
-								<th>CODE POSTAL</th>
-								<th>TELEPHONE</th>
-								<th>EMAIL</th>
 								<th>ACTION</th>
 							</tr>
 						</thead>
@@ -71,12 +66,7 @@
 									<td><c:out value="${c.nom}"></c:out></td>
 									<td><c:out value="${c.prenom}"></c:out></td>
 									<td><c:out value="${c.nomEntreprise}"></c:out></td>
-									<td><c:out value="${c.adresse}"></c:out></td>
-									<td><c:out value="${c.ville}"></c:out></td>
-									<td><c:out value="${c.codePostal}"></c:out></td>
-									<td><c:out value="${c.telephone}"></c:out></td>
-									<td><c:out value="${c.email}"></c:out></td>
-									<td><a
+									<td><a class="btn btn-default"
 										href="AfficherClient?id=<c:out value='${c.idClient}' />">Afficher</a></td>
 								</tr>
 							</c:forEach>

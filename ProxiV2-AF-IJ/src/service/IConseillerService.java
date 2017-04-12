@@ -83,5 +83,19 @@ public interface IConseillerService {
 	 *            client a supprimer
 	 */
 	public void supprimerClient(Conseiller conseiller, Client client);
+	
+	/**
+	 * Récupère un compte par son identifiant
+	 * @param id identifiant du compte
+	 * @return le Compte récupéré
+	 */
+	public Compte recupererCompteParId(int id);
+	
+	/**
+	 * Récupère tous les comptes de l'agence sauf le compte donné en argument
+	 * @param compte Compte à ne pas récupérer
+	 * @return La collection de tous les comptes sauf le compte donné
+	 */
+	public Collection<Compte> recupererAutresComptes(Compte compte);
 
 }

@@ -33,5 +33,11 @@ public interface IDao {
 	public Client retourneClientParId(int idClient);
 
 	public Collection<Client> listerClientsParConseiller(int idConseiller);
+	
+	/**
+	 * Récupère tous les comptes de l'agence
+	 * @return une collection de compte
+	 */
+	public Collection<Compte> listerComptes();
 
 }
