@@ -23,8 +23,15 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public Collection<Compte> recupererAutresComptes(Compte compte) {
 		Collection<Compte> comptes = iDao.listerComptes();
-		comptes.remove(compte);
-		return comptes;
+		for (Compte c : comptes) {
+			if(c.getIdCompte()==compte.getIdCompte()){
+				comptes.remove(c);
+				return comptes;
+			}
+			
+		}
+		
+		return new ArrayList<Compte>();
 	}
 
 	@Override
