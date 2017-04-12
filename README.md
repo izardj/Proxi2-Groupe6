@@ -26,7 +26,7 @@ Comment lancer l'application Java ProxiBanqueV2
 			
 	Important: bien décocher "Activer la vérification des clés étrangères" pour éviter les problèmes lors du peuplement
 			
-	- Copier le fichier "ProxiV2-AF-IJ.war" dans le repertoire "webapps" de Tomcat
+	- Copier le fichier "livraison\ProxiV2-AF-IJ.war" dans le repertoire "webapps" de Tomcat
 		
 	(ex: C:\apache-tomcat-9.0.0.M19\webapps, si Tomcat est installé dans C:\apache-tomcat-9.0.0.M19)
 			
