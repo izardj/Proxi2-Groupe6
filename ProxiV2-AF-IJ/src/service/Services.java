@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import dao.Dao;
@@ -144,31 +145,17 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte compteDeb,
 			double montant) {
-<<<<<<< HEAD
 		if (client.getConseiller().getIdConseiller() == conseiller.getIdConseiller()) {
-=======
-		
-		if (client.getConseiller().getIdConseiller()==conseiller.getIdConseiller()) {
->>>>>>> branch 'master' of https://github.com/serviceshuios/Proxi2-Groupe6.git
 
 			double s = compteDeb.getSolde();
 			compteDeb = debiterCompte(compteDeb, montant); // debite un compte
 			// verification que le debit a eu lieu
-<<<<<<< HEAD
 			if (s != compteDeb.getSolde()) {
 				iDao.modifierCompte(compteDeb);
 				compteCred = crediterCompte(compteCred, montant); // credite un
 																	// compte
 				iDao.modifierCompte(compteCred);
 				return true;
-=======
-			if (s!=compteDeb.getSolde())
-			{
-			iDao.modifierCompte(compteDeb);
-			compteCred = crediterCompte(compteCred, montant); // credite un compte
-			iDao.modifierCompte(compteCred);
-			return true;
->>>>>>> branch 'master' of https://github.com/serviceshuios/Proxi2-Groupe6.git
 			}
 
 		}
