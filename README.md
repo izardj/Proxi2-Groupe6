@@ -12,7 +12,7 @@ Comment lancer l'application Java ProxiBanqueV2
 		
 	(Par exemple WAMPserver permet d'en installer un, il est téléchargeable depuis http://www.wampserver.com/)
 			
-	- Créer une base de donnée nommée : "proxibanquefij", définir son encodage "utf8_general_ci".
+	- Créer une base de donnée nommée : "proxibanqueafij", définir son encodage "utf8_general_ci".
 		
 	(En utilisant par exemple phpMyAdmin fournit dans WAMPserver)
 ## Execution :
