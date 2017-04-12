@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 12 Avril 2017 à 06:51
+-- Généré le :  Mer 12 Avril 2017 à 06:59
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -22,6 +22,11 @@ SET time_zone = "+00:00";
 --
 
 --
+-- Vider la table avant d'insérer `compte`
+--
+
+TRUNCATE TABLE `compte`;
+--
 -- Vider la table avant d'insérer `client`
 --
 
@@ -29,6 +34,12 @@ TRUNCATE TABLE `client`;
 --
 -- Contenu de la table `client`
 --
+--
+-- Vider la table avant d'insérer `conseiller`
+--
+
+TRUNCATE TABLE `conseiller`;
+
 
 INSERT INTO `client` (`id_client`, `nom`, `prenom`, `adresse`, `code_postal`, `ville`, `telephone`, `entreprise`, `nom_entreprise`, `email`, `id_conseiller`) VALUES
 (3, 'Smith', 'John', 'route du chemin', '78852', 'Lille', '014458712', 1, 'Ford', 'john.smith@test.com', 1),
@@ -38,11 +49,7 @@ INSERT INTO `client` (`id_client`, `nom`, `prenom`, `adresse`, `code_postal`, `v
 (7, 'Ayraud', 'Florent', 'gabriel péri', '69100', 'Villerubane', '98754121', 0, NULL, 'fayraud@email.com', 1),
 (8, 'William', 'David', 'chemin de la vie', '12000', 'Paris', '01458796', 0, NULL, 'wd@test.com', 2);
 
---
--- Vider la table avant d'insérer `compte`
---
 
-TRUNCATE TABLE `compte`;
 --
 -- Contenu de la table `compte`
 --
@@ -58,11 +65,7 @@ INSERT INTO `compte` (`id_compte`, `num_compte`, `solde`, `date_ouverture`, `rem
 (10, 968574, 45000, '2008-08-02', NULL, 1000, 'CompteCourant', 8),
 (11, 254563, 458792.25, '2003-07-01', 0.03, NULL, 'CompteEpargne', 8);
 
---
--- Vider la table avant d'insérer `conseiller`
---
 
-TRUNCATE TABLE `conseiller`;
 --
 -- Contenu de la table `conseiller`
 --
