@@ -39,23 +39,27 @@ public class Services implements IConseillerService, ILoginService {
 	}
 
 	@Override
-	public void modifierClient(Conseiller conseiller, Client client, String nom, String prenom, String email,
+	public boolean modifierClient(Conseiller conseiller, int idClient, String nom, String prenom, String email,
 			String adresse, String codePostal, String ville, String telephone) {
-			Collection <Client> clients= iDao.listerClientsParConseiller(conseiller.getIdConseiller());
-			for (Client c : clients) {
-			if(client.getIdClient() == c.getIdClient()){
-			client.setConseiller(conseiller);
-			client.setNom(nom);
-			client.setPrenom(prenom);
-			client.setEmail(email);
-			client.setAdresse(adresse);
-			client.setCodePostal(codePostal);
-			client.setVille(ville);
-			client.setTelephone(telephone);
-			iDao.modifierClient(client);
+		Collection<Client> clients = iDao.listerClientsParConseiller(conseiller.getIdConseiller());
+		for (Client c : clients) {
+			if (c.getIdClient() == idClient) {
+				Client client = new Client();
+				client.setConseiller(conseiller);
+				client.setIdClient(idClient);
+				client.setNom(nom);
+				client.setPrenom(prenom);
+				client.setAdresse(adresse);
+				client.setCodePostal(codePostal);
+				client.setVille(ville);
+				client.setTelephone(telephone);
+				client.setEmail(email);
+				if (iDao.modifierClient(client) == 1) {
+					return true;
+				}
+			}
 		}
-
-	}
+		return false;
 	}
 
 	@Override
@@ -130,26 +134,24 @@ public class Services implements IConseillerService, ILoginService {
 
 		return c;
 	}
-	
 
 	@Override
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte compteDeb,
 			double montant) {
 		int i = 0;
-		if (client.getConseiller().getIdConseiller()==conseiller.getIdConseiller()) {
+		if (client.getConseiller().getIdConseiller() == conseiller.getIdConseiller()) {
 
 			double s = compteDeb.getSolde();
-			compteDeb =debiterCompte(compteDeb, montant); // debite un compte
+			compteDeb = debiterCompte(compteDeb, montant); // debite un compte
 			// verification que le debit a eu lieu
-			if (s!=compteDeb.getSolde())
-			{
+			if (s != compteDeb.getSolde()) {
 				i += iDao.modifierCompte(compteDeb);
-			compteCred = crediterCompte(compteCred, montant); // credite un compte
+				compteCred = crediterCompte(compteCred, montant); // credite un
+																	// compte
 				i += iDao.modifierCompte(compteCred);
-			return true;
+				return true;
 			}
 
-		
 		}
 		return false;
 	}

@@ -32,28 +32,20 @@ public interface IConseillerService {
 	public Collection<Client> listerClients(Conseiller conseiller);
 
 	/**
-	 * Modifie le client d'un conseiller
+	 * Modifie un client spécifique d'un conseiller
 	 * 
 	 * @param conseiller
-	 *            conseiller qui modifie sont client
-	 * @param client
-	 *            client a modifier
+	 * @param idClient
 	 * @param nom
-	 *            nouveau nom
 	 * @param prenom
-	 *            nouveau prenom
 	 * @param email
-	 *            nouveau email
 	 * @param adresse
-	 *            nouvelle adresse
 	 * @param codePostal
-	 *            nouveau code postal
 	 * @param ville
-	 *            nouvelle ville
 	 * @param telephone
-	 *            nouveau numeros de telephone
+	 * @return true si le client a bien été modifié et false en cas contraire
 	 */
-	public void modifierClient(Conseiller conseiller, Client client, String nom, String prenom, String email,
+	public boolean modifierClient(Conseiller conseiller, int idClient, String nom, String prenom, String email,
 			String adresse, String codePostal, String ville, String telephone);
 
 	public Client afficherClient(Conseiller conseiller, int id);
@@ -85,17 +77,21 @@ public interface IConseillerService {
 	 *            client a supprimer
 	 */
 	public void supprimerClient(Conseiller conseiller, Client client);
-	
+
 	/**
 	 * Récupère un compte par son identifiant
-	 * @param id identifiant du compte
+	 * 
+	 * @param id
+	 *            identifiant du compte
 	 * @return le Compte récupéré
 	 */
 	public Compte recupererCompteParId(int id);
-	
+
 	/**
 	 * Récupère tous les comptes de l'agence sauf le compte donné en argument
-	 * @param compte Compte à ne pas récupérer
+	 * 
+	 * @param compte
+	 *            Compte à ne pas récupérer
 	 * @return La collection de tous les comptes sauf le compte donné
 	 */
 	public Collection<Compte> recupererAutresComptes(Compte compte);
