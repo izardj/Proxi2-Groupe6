@@ -8,7 +8,7 @@ Comment lancer l'application Java ProxiBanqueV2
 
 	(Téléchargé depuis : http://tomcat.apache.org/download-90.cgi)
 			
-	- Installer un serveur de base de donnée mySQL sur la machine cible et s'assurée qu'elle est lancée.
+	- Installer un serveur de base de donnée mySQL sur la machine cible et s'assurer qu'il est lancé.
 		
 	(Par exemple WAMPserver permet d'en installer un, il est téléchargeable depuis http://www.wampserver.com/)
 			
