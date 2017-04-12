@@ -12,7 +12,7 @@ Comment lancer l'application Java ProxiBanqueV2
 		
 	(Par exemple WAMPserver permet d'en installer un, il est téléchargeable depuis http://www.wampserver.com/)
 			
-	- Créer une base de donnée nommée : "proxibanquefij", définir son encodage "utf8_general_ci".
+	- Créer une base de donnée nommée : "proxibanqueafij", définir son encodage "utf8_general_ci".
 		
 	(En utilisant par exemple phpMyAdmin fournit dans WAMPserver)
 ## Execution :
@@ -26,7 +26,7 @@ Comment lancer l'application Java ProxiBanqueV2
 			
 	Important: bien décocher "Activer la vérification des clés étrangères" pour éviter les problèmes lors du peuplement
 			
-	- Copier le fichier "ProxiV2-AF-IJ.war" dans le repertoire "webapps" de Tomcat
+	- Copier le fichier "livraison\ProxiV2-AF-IJ.war" dans le repertoire "webapps" de Tomcat
 		
 	(ex: C:\apache-tomcat-9.0.0.M19\webapps, si Tomcat est installé dans C:\apache-tomcat-9.0.0.M19)
 			
