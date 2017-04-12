@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Collection;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import dao.Dao;
 import dao.DaoConnexion;
 import dao.IDao;
+import metier.Client;
 import metier.Compte;
 import metier.CompteCourant;
 
@@ -18,9 +21,13 @@ public class DaoTest {
 
 	private IDao dao = new Dao();
 
+	@AfterClass
+	public static void after() {
+		DaoConnexion.closeConnexion();
+	}
+
 	@Test
 	public void testListerTousComptes() {
-
 		Connection conn = DaoConnexion.getConnexion();
 		PreparedStatement ps;
 		try {
@@ -50,7 +57,6 @@ public class DaoTest {
 
 		// appel de la methode
 		dao.modifierCompte(c);
-
 		Connection conn = DaoConnexion.getConnexion();
 		PreparedStatement ps;
 		try {
@@ -68,4 +74,79 @@ public class DaoTest {
 		}
 	}
 
+	@Test
+	public void testModifierCompteInnexistantExistant() {
+		// simule le compte 999 qui n'existe pas en bdd
+		Compte c = new CompteCourant();
+		c.setIdCompte(999);
+
+		// appel de la methode
+		int nbLignes = dao.modifierCompte(c);
+
+		Assert.assertEquals(0, nbLignes);
+	}
+
+	@Test
+	public void testModifierClientExistant() {
+		// le client 8 doit exister
+		int idClient = 8;
+		String nouveauNom = "nomTest";
+
+		Client c = new Client();
+		c.setIdClient(idClient);
+		c.setNom(nouveauNom);
+		c.setPrenom("testPrenom");
+		c.setAdresse("testAdresse");
+		c.setCodePostal("testCodePostal");
+		c.setVille("testVille");
+		c.setTelephone("testTelephone");
+		c.setEntreprise(true);
+		c.setNomEntreprise("testEntreprise");
+		c.setEmail("test@email.test");
+		// appel de la methode
+		dao.modifierClient(c);
+		Connection conn = DaoConnexion.getConnexion();
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement("SELECT nom FROM Client WHERE id_client = ?");
+			ps.setInt(1, idClient);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String nomBDD = rs.getString("nom");
+
+			// assertion
+			Assert.assertEquals(nouveauNom, nomBDD);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testModifierClientInnexistantExistant() {
+		// simule le compte 99 qui n'existe pas en bdd
+		Client c = new Client();
+		c.setIdClient(99);
+		c.setNom("nomTest");
+		c.setPrenom("testPrenom");
+		c.setAdresse("testAdresse");
+		c.setCodePostal("testCodePostal");
+		c.setVille("testVille");
+		c.setTelephone("testTelephone");
+		c.setEntreprise(true);
+		c.setNomEntreprise("testEntreprise");
+		c.setEmail("test@email.test");
+
+		try {
+			// appel de la methode
+			int nbLignes = dao.modifierClient(c);
+
+			Assert.assertEquals(0, nbLignes);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
 }
