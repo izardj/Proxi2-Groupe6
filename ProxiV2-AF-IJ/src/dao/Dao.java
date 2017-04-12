@@ -300,6 +300,7 @@ public class Dao implements IDao {
 			ps.setBoolean(7, client.isEntreprise());
 			ps.setString(8, client.getNomEntreprise());
 			ps.setString(9, client.getEmail());
+			ps.setInt(10, client.getIdClient());
 
 			// 4- executer la requête
 			i = ps.executeUpdate();
