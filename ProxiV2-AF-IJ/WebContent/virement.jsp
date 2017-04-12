@@ -61,7 +61,7 @@
 
 				<h3>Compte à débiter</h3>
 				<input type="hidden" name="idcomptedebiteur"
-					value="<c:out value="${compteDebiteur.numeroCompte}" />" />
+					value="<c:out value="${compteDebiteur.idCompte}" />" />
 				<dl class="dl-horizontal">
 					<dt>Numéro de compte</dt>
 					<dd>

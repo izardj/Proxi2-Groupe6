@@ -48,6 +48,11 @@
 			<h1>Gestion des clients</h1>
 			<h2 class="sub-header">Afficher un client</h2>
 			<!-- DEBUT MESSAGE -->
+			<c:if test="${not empty alertDanger}">
+				<div class="alert alert-danger" role="alert">
+					<c:out value="${alertDanger}" />
+				</div>
+			</c:if>
 			<c:if test="${not empty alertSuccess}">
 				<div class="alert alert-success" role="alert">
 					<c:out value="${alertSuccess}" />
@@ -112,7 +117,7 @@
 									<td><c:out value="${c.decouvert}" /></td>
 									<td><c:out value="${c.dateOuverture}" /></td>
 									<td><a class="btn btn-default"
-										href="Virement?idclient=<c:out value='${client.idClient}' />&id=<c:out value='${c.idCompte}' />">Effectuer
+										href="Virement?idclient=<c:out value='${client.idClient}' />&idcompte=<c:out value='${c.idCompte}' />">Effectuer
 											virement</a></td>
 								</tr>
 							</tbody>
@@ -139,7 +144,7 @@
 									<td><c:out value="${c.remuneration}" /></td>
 									<td><c:out value="${c.dateOuverture}" /></td>
 									<td><a class="btn btn-default"
-										href="Virement?id=<c:out value='${c.idCompte}' />">Effectuer
+										href="Virement?idclient=<c:out value='${client.idClient}' />&idcompte=<c:out value='${c.idCompte}' />">Effectuer
 											virement</a></td>
 								</tr>
 							</tbody>

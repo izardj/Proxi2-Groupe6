@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import metier.Compte;
 import service.IConseillerService;
@@ -36,9 +37,10 @@ public class Virement extends HttpServlet {
 		// défini l'encodage des paramètres en UTF-8
 		request.setCharacterEncoding("UTF-8");
 		
-		// verifier session
-		if(request.isRequestedSessionIdValid()){			
-			int idCompte = Integer.parseInt(request.getParameter("id"));
+		//vérifie la session
+		HttpSession session = request.getSession();
+		if(session.getAttribute("conseiller") != null){			
+			int idCompte = Integer.parseInt(request.getParameter("idcompte"));
 			int idClient = Integer.parseInt(request.getParameter("idclient"));
 			
 			Compte compteDebiteur = service.recupererCompteParId(idCompte);
