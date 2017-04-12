@@ -193,8 +193,39 @@ public class Dao implements IDao {
 
 	@Override
 	public int modifierClient(Client client) {
-		// TODO Auto-generated method stub
-		return 0;
+		int i = 0;
+		try {
+
+			// 2- créer la connexion
+			Connection conn = DaoConnexion.getConnexion();
+			// 3- créer la requête
+
+			PreparedStatement ps = conn.prepareStatement(
+					"UPDATE client SET nom = ? , prenom = ?, adresse = ?,code_postal =?, ville = ?,telephone = ?,entreprise = ?, nom_entreprise = ?,email =?, WHERE id_conseiller = ?");
+			ps.setString(1, client.getNom());
+			ps.setString(2, client.getPrenom());
+			ps.setString(3, client.getAdresse());
+			ps.setString(4, client.getCodePostal());
+			ps.setString(5, client.getVille());
+			ps.setString(6, client.getTelephone());
+			ps.setBoolean(7, client.isEntreprise());
+			ps.setString(8, client.getNomEntreprise());
+			ps.setString(9, client.getEmail());
+
+			// 4- executer la requête
+			i = ps.executeUpdate();
+			// 5- présenter les résultats
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// code qui est executé quelque soit les étapes précédentes
+			// 6- fermer la connexion
+			DaoConnexion.closeConnexion();
+
+		}
+		return i;
 	}
 
 	@Override
