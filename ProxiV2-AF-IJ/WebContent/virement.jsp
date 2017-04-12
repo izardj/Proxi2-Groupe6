@@ -47,10 +47,21 @@
 		<div class="starter-template">
 			<h1>Gestion des clients</h1>
 			<h2 class="sub-header">Virement compte à compte</h2>
+			<!-- DEBUT MESSAGE -->
+			<c:if test="${not empty alertDanger}">
+				<div class="alert alert-danger" role="alert">
+					<c:out value="${alertDanger}" />
+				</div>
+			</c:if>
+			<!-- FIN MESSAGE -->
 			<form class="form-horizontal" method="post"
 				action="EffectuerVirement">
+				<input type="hidden" name="idclient"
+					value="<c:out value="${idclient}" />" />
+
 				<h3>Compte à débiter</h3>
-				<input type="hidden" name="idcomptedebiteur" />
+				<input type="hidden" name="idcomptedebiteur"
+					value="<c:out value="${compteDebiteur.numeroCompte}" />" />
 				<dl class="dl-horizontal">
 					<dt>Numéro de compte</dt>
 					<dd>
@@ -67,10 +78,10 @@
 						de compte :</label>
 					<div class="col-sm-10">
 						<select class="form-control" id="comptecrediteur"
-							name="comptecrediteur">
+							name="idcomptecrediteur">
 							<option value="" selected disabled>Choisissez un compte</option>
 							<c:forEach var="c" items="${autresComptes}">
-								<option><c:out value="${c.idCompte}" /><c:out
+								<option value="<c:out value='${c.idCompte}' />"><c:out
 										value="${c.numeroCompte}" /></option>
 							</c:forEach>
 						</select>
@@ -86,7 +97,8 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">Effectuer virement</button>
+						<button type="submit" class="btn btn-default">Effectuer
+							virement</button>
 					</div>
 				</div>
 

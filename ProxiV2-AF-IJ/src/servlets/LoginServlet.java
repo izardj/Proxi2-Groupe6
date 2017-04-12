@@ -42,7 +42,6 @@ public class LoginServlet extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 
 		// 2- Traitement avec la couche service
-		// TODO utiliser la couche service pour identifier client plutot qu'en dur
 		ILoginService ls = new Services();
 		Conseiller conseiller = ls.verificationLogin(login, pwd);
 		
