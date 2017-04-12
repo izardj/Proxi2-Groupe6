@@ -290,7 +290,7 @@ public class Dao implements IDao {
 			// 3- créer la requête
 
 			PreparedStatement ps = conn.prepareStatement(
-					"UPDATE client SET nom = ? , prenom = ?, adresse = ?,code_postal =?, ville = ?,telephone = ?,entreprise = ?, nom_entreprise = ?,email =?, WHERE id_conseiller = ?");
+					"UPDATE client SET nom = ?,prenom = ?, adresse = ?,code_postal =?,ville = ?,telephone = ?,entreprise = ?,nom_entreprise = ?,email =?WHERE id_client = ?");
 			ps.setString(1, client.getNom());
 			ps.setString(2, client.getPrenom());
 			ps.setString(3, client.getAdresse());
