@@ -12,14 +12,14 @@ public interface IDao {
  * @param compte Compte modifié
  * @return retourne le nombre de lignes modifiées dans la table
  */
- */
+ 
 	public int modifierCompte(Compte compte);
 /**
  * methode qui creer un conseiller dans la base de données
  * @param conseiller conseiller a inserer dans la base de données
  * @return retourne le nombre de lignes modifiées dans la table
  */
- */
+ 
 	public int creerConseiller(Conseiller conseiller);
 /**
  * Modifie un conseiller dans la base de données
