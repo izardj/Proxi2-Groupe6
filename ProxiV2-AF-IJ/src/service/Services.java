@@ -134,7 +134,7 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte compteDeb,
 			double montant) {
-		if (client.getConseiller().equals(conseiller)) {
+		if (client.getConseiller().getIdConseiller()==conseiller.getIdConseiller()) {
 
 			compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde());
 			// debite un compte et verification que le debit a eu lieu
