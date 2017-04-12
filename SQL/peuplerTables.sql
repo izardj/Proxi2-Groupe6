@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 12 Avril 2017 à 06:37
+-- Généré le :  Mer 12 Avril 2017 à 06:51
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -69,6 +70,7 @@ TRUNCATE TABLE `conseiller`;
 INSERT INTO `conseiller` (`id_conseiller`, `nom`, `prenom`, `adresse`, `code_postal`, `ville`, `telephone`, `login`, `pwd`) VALUES
 (1, 'Robichet', 'Robert', '24 rue du Chène', '38420', 'Le Versoud', '0478458596', 'demo1', 'demo1'),
 (2, 'Patoulatchi', 'Marcel', '5 avenue du Chateau', '45789', 'Ville sur marne', '0745859632', 'demo2', 'demo2');
+SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
