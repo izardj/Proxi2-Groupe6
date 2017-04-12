@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import dao.Dao;
@@ -59,13 +60,13 @@ public class Services implements IConseillerService, ILoginService {
 	public Client afficherClient(Conseiller conseiller, int id) {
 		Client c = iDao.retourneClientParId(id);
 		Collection <Client> clients= iDao.listerClientsParConseiller(conseiller.getIdConseiller());
-		if (clients.contains(c)) {
-			c.setConseiller(conseiller);
-			return c;
-		} else {
-			return new Client();
+		for (Client client : clients) {
+			if(client.getIdClient() == c.getIdClient()){
+				c.setConseiller(conseiller);
+				return c;
+			}
 		}
-
+		return new Client();
 	}
 
 	/**
