@@ -39,8 +39,9 @@ public class AfficherClient extends HttpServlet {
 		// défini l'encodage des paramètres en UTF-8
 		request.setCharacterEncoding("UTF-8");
 
-		if (request.isRequestedSessionIdValid()) {
-			HttpSession session = request.getSession();
+		//vérifie la session
+		HttpSession session = request.getSession();
+		if(session.getAttribute("conseiller") != null){
 			Conseiller conseiller = (Conseiller) session.getAttribute("conseiller");
 
 			int id = Integer.parseInt(request.getParameter("id"));

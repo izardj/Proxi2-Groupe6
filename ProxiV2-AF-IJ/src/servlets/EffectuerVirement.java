@@ -40,34 +40,34 @@ public class EffectuerVirement extends HttpServlet {
 		// défini l'encodage des paramètres en UTF-8
 		request.setCharacterEncoding("UTF-8");
 
-		if (request.isRequestedSessionIdValid()) {
-			HttpSession session = request.getSession();
+		//vérifie la session
+		HttpSession session = request.getSession();
+		if(session.getAttribute("conseiller") != null){
 			Conseiller conseiller = (Conseiller) session.getAttribute("conseiller");
 
 			// 1- Récupération les paramètres
 			int idClient = Integer.parseInt(request.getParameter("idclient"));
 			int idCompteDebiteur = Integer.parseInt(request.getParameter("idcomptedebiteur"));
 			int idCompteCrediteur = Integer.parseInt(request.getParameter("idcomptecrediteur"));
-			Double montant = Double.parseDouble(request.getParameter("montant"));
+			double montant = Double.parseDouble(request.getParameter("montant"));
+
 			
 			// 2- Traitement avec la couche service
 			Client client = service.afficherClient(conseiller, idClient);
 			Compte compteCred = service.recupererCompteParId(idCompteCrediteur);
 			Compte compteDeb = service.recupererCompteParId(idCompteDebiteur);
-			
-			if(service.effectuerVirement(conseiller, client, compteCred, compteDeb, montant)){
-				request.setAttribute("alertSuccess", "Le virement a bien eu lieu");
-				request.getRequestDispatcher("AfficherClient?id=" + idClient).forward(request, response);
-			}else{
-				request.setAttribute("alertDanger", "Le virement n'a pas fonctionné");
-				request.getRequestDispatcher("Virement?idclient=" + idClient + "&id=" + idCompteDebiteur).forward(request, response);
-			}
 
-			
+			if (service.effectuerVirement(conseiller, client, compteCred, compteDeb, montant)) {
+				request.setAttribute("alertSuccess", "Le virement a bien eu lieu");
+			} else {
+				request.setAttribute("alertDanger", "Le virement n'a pas fonctionné");
+			}
+			request.getRequestDispatcher("AfficherClient?id=" + idClient).forward(request, response);
+
 		} else {
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
-		
+
 	}
 
 	/**
