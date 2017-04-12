@@ -7,7 +7,6 @@ import java.util.Collection;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import dao.Dao;
