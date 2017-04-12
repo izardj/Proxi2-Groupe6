@@ -95,7 +95,7 @@
 									<th>SOLDE</th>
 									<th>DECOUVERT</th>
 									<th>DATE OUVERTURE</th>
-									<th>VIREMENT</th>
+									<th>ACTION</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -105,7 +105,7 @@
 									<td><c:out value="${c.decouvert}" /></td>
 									<td><c:out value="${c.dateOuverture}" /></td>
 									<td><a class="btn btn-default"
-										href="Virement?id=<c:out value='${c.idCompte}' />">Effectuer</a></td>
+										href="Virement?id=<c:out value='${c.idCompte}' />">Effectuer virement</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -121,7 +121,7 @@
 									<th>SOLDE</th>
 									<th>REMUNERATION</th>
 									<th>DATE OUVERTURE</th>
-									<th>VIREMENT</th>
+									<th>ACTION</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -131,7 +131,7 @@
 									<td><c:out value="${c.remuneration}" /></td>
 									<td><c:out value="${c.dateOuverture}" /></td>
 									<td><a class="btn btn-default"
-										href="Virement?id=<c:out value='${c.idCompte}' />">Effectuer</a></td>
+										href="Virement?id=<c:out value='${c.idCompte}' />">Effectuer virement</a></td>
 								</tr>
 								</tr>
 							</tbody>

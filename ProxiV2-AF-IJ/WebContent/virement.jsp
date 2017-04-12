@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Afficher client</title>
+<title>Effectuer un virement</title>
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
@@ -47,9 +47,50 @@
 		<div class="starter-template">
 			<h1>Gestion des clients</h1>
 			<h2 class="sub-header">Virement compte à compte</h2>
-			<h3>Compte à débiter</h3>
-			<h3>Compte à créditer</h3>
-			
+			<form class="form-horizontal" method="post"
+				action="EffectuerVirement">
+				<h3>Compte à débiter</h3>
+				<input type="hidden" name="idcomptedebiteur" />
+				<dl class="dl-horizontal">
+					<dt>Numéro de compte</dt>
+					<dd>
+						<c:out value="${compteDebiteur.numeroCompte}" />
+					</dd>
+					<dt>Solde</dt>
+					<dd>
+						<c:out value="${compteDebiteur.solde}" />
+					</dd>
+				</dl>
+				<h3>Compte à créditer</h3>
+				<div class="form-group">
+					<label for="comptecrediteur" class="col-sm-2 control-label">Numéro
+						de compte :</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="comptecrediteur"
+							name="comptecrediteur">
+							<option value="" selected disabled>Choisissez un compte</option>
+							<c:forEach var="c" items="${autresComptes}">
+								<option><c:out value="${c.idCompte}" /><c:out
+										value="${c.numeroCompte}" /></option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+				<h3>Montant à virer</h3>
+				<div class="form-group">
+					<label for="montant" class="col-sm-2 control-label">Montant</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="montant"
+							placeholder="Montant" name="montant" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">Effectuer virement</button>
+					</div>
+				</div>
+
+			</form>
 		</div>
 
 	</div>
