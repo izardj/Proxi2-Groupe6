@@ -142,7 +142,7 @@ public class Services implements IConseillerService, ILoginService {
 	@Override
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte compteDeb,
 			double montant) {
-		int i = 0;
+		
 		if (client.getConseiller().getIdConseiller()==conseiller.getIdConseiller()) {
 
 			double s = compteDeb.getSolde();
@@ -150,9 +150,9 @@ public class Services implements IConseillerService, ILoginService {
 			// verification que le debit a eu lieu
 			if (s!=compteDeb.getSolde())
 			{
-				i += iDao.modifierCompte(compteDeb);
+			iDao.modifierCompte(compteDeb);
 			compteCred = crediterCompte(compteCred, montant); // credite un compte
-				i += iDao.modifierCompte(compteCred);
+			iDao.modifierCompte(compteCred);
 			return true;
 			}
 
