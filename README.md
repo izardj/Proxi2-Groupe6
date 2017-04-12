@@ -33,6 +33,13 @@ Comment lancer l'application Java ProxiBanqueV2
 	- Accéder à l'application par un navigateur via l'url suivante "http://localhost:8085/ProxiV2-AF-IJ/"
 		
 	(le port 8085 dépend de votre configuration Tomcat)
+	
+	- Par défaut il y'a deux conseillers dans la base
+		login : demo1
+		mot de passe : demo1
+		
+		login : demo2
+		mot de passe : demo2
 
 ## Consulter la documentation: 
 	- Double-cliquer sur le fichier index.html se trouvant dans le repertoire "doc" livré avec le fichier jar.
