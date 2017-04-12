@@ -1,7 +1,7 @@
 # Proxi2-Groupe6
 Comment lancer l'application Java ProxiBanqueV2
 
-Pré-requis:
+## Pré-requis:
 	- Machine cible dotée d'un systeme d'exploitation Windows.
 		
 	- Installer un serveur d'application Tomcat 9 sur la machine cible et s'assurer qu'il est lancé.
@@ -15,7 +15,7 @@ Pré-requis:
 	- Créer une base de donnée nommée : "proxibanquefij", définir son encodage "utf8_general_ci".
 		
 	(En utilisant par exemple phpMyAdmin fournit dans WAMPserver)
-Execution :
+## Execution :
 	- Créer les tables de la base de donnée en exécutant le fichier "SQL\creerTables.sql"
 		
 	(dans phpMyAdmin en cliquant sur l'onglet import)
@@ -34,5 +34,5 @@ Execution :
 		
 	(le port 8085 dépend de votre configuration Tomcat)
 
-Consulter la documentation: 
+## Consulter la documentation: 
 	- Double-cliquer sur le fichier index.html se trouvant dans le repertoire "doc" livré avec le fichier jar.
