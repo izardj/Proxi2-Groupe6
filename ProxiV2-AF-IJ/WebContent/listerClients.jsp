@@ -34,8 +34,9 @@
 					<a href="LogoutServlet">Se deconnecter</a>
 				</p>
 				<p class="navbar-text navbar-right">
-					Connecté en tant que
-					<c:out value="${conseiller.nom}" />
+					Connecté en tant que <strong><c:out
+							value="${conseiller.prenom}" /> <c:out value="${conseiller.nom}" />
+					</strong>
 				</p>
 			</div>
 			<!--/.nav-collapse -->
