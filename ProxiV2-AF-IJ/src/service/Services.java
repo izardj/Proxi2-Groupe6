@@ -55,11 +55,17 @@ public class Services implements IConseillerService, ILoginService {
 
 	@Override
 	public Client afficherClient(Conseiller conseiller, int id) {
-		/*
-		 * if (client.getConseiller().equals(conseiller)) { return
-		 * iDao.retourneClientParId(client.getIdClient()); }
-		 */
-		return iDao.retourneClientParId(id);
+		Client c = iDao.retourneClientParId(id);
+		
+		 if (c.getConseiller().equals(conseiller)) {
+			 return c;
+			  }
+		 else{
+			 return new Client();
+		 }
+		
+		
+	
 	}
 
 	/**
