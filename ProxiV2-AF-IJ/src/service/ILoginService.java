@@ -4,10 +4,14 @@ import metier.Conseiller;
 
 public interface ILoginService {
 	/**
-	 * Methode d'authentification par login et PWD		
-	 * @param login parametre login	
-	 * @param pwd parametr  mots de passe
-	 * @return
+	 * Methode retournant un conseiller à partir de son login et de son mot de
+	 * passe
+	 * 
+	 * @param login
+	 *            un login
+	 * @param pwd
+	 *            un mot de passe
+	 * @return le conseiller correspondant au login et pwd
 	 */
 	public Conseiller verificationLogin(String login, String pwd);
 

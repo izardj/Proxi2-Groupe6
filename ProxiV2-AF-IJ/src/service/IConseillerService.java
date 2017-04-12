@@ -8,59 +8,54 @@ import metier.Conseiller;
 
 public interface IConseillerService {
 
-	// pas prioritaire
 	/**
-	 * creer un nouveau client
-	 * 
-	 * @param conseiller
-	 *            conseiller qui creer le client
-	 * @param client
-	 *            client a créer
-	 * @return
-	 */
-	public boolean creerClient(Conseiller conseiller, Client client);
-	/**
-	 * Retourne le conseiller corespondant a l'idConseiller
-	 * @param idConseiller identifiant du conseiller a retourner
-	 * @return
-	 */
-	public Conseiller afficherConseiller(int idConseiller);
-
-	/**
-	 * renvoie la liste de client d'un conseiller
+	 * Récupère tous les clients d'un conseiller
 	 * 
 	 * @param conseiller
 	 *            conseiller dont on veut les clients
-	 * @return
+	 * @return la collection de clients du conseiller
 	 */
 	public Collection<Client> listerClients(Conseiller conseiller);
+
+	/**
+	 * Retourne le client correspondant à sont identifiant si le conseiller gère ce dernier
+	 * 
+	 * @param conseiller
+	 *            conseiller qui demande le client
+	 * @param id
+	 *            identifiant du client a retourner
+	 * @returnretourne le client correspondantFs
+	 */
+	public Client afficherClient(Conseiller conseiller, int id);
 
 	/**
 	 * Modifie un client spécifique d'un conseiller
 	 * 
 	 * @param conseiller
+	 *            Le conseiller qui gère le client
 	 * @param idClient
+	 *            l'identifiant du client
 	 * @param nom
+	 *            le nom du client
 	 * @param prenom
+	 *            le prénom du client
 	 * @param email
+	 *            l'email du client
 	 * @param adresse
+	 *            l'adresse du client
 	 * @param codePostal
+	 *            le code postal du client
 	 * @param ville
+	 *            la ville du client
 	 * @param telephone
+	 *            le numéro de téléphone du client
 	 * @return true si le client a bien été modifié et false en cas contraire
 	 */
 	public boolean modifierClient(Conseiller conseiller, int idClient, String nom, String prenom, String email,
 			String adresse, String codePostal, String ville, String telephone);
-/**
- * retourne le client correspondant a l'id si le conseiller qui le demande est sont conseiller
- * @param conseiller conseiller qui demande le client
- * @param id identifiant du client a retourner
- * @return
- */
-	public Client afficherClient(Conseiller conseiller, int id);
 
 	/**
-	 * Methode qui permet de realiser des virement de compte a compte
+	 * Methode qui permet de realiser des virement de compte à compte
 	 * 
 	 * @param conseiller
 	 *            conseiller qui realise le virement
@@ -76,16 +71,6 @@ public interface IConseillerService {
 	 */
 	public boolean effectuerVirement(Conseiller conseiller, Client client, Compte compteCred, Compte comptedeb,
 			double montant);
-
-	/**
-	 * supprime un client
-	 * 
-	 * @param conseiller
-	 *            conseiller qui supprime le client
-	 * @param client
-	 *            client a supprimer
-	 */
-	public void supprimerClient(Conseiller conseiller, Client client);
 
 	/**
 	 * Récupère un compte par son identifiant
@@ -104,4 +89,35 @@ public interface IConseillerService {
 	 * @return La collection de tous les comptes sauf le compte donné
 	 */
 	public Collection<Compte> recupererAutresComptes(Compte compte);
+
+	/**
+	 * Retourne le conseiller corespondant a l'idConseiller
+	 * 
+	 * @param idConseiller
+	 *            identifiant du conseiller a retourner
+	 * @return le conseiller correspondant
+	 */
+	public Conseiller afficherConseiller(int idConseiller);
+
+	/**
+	 * Création d'un client si le conseiller n'a pas atteint son nombre de
+	 * clients maximum
+	 * 
+	 * @param conseiller
+	 *            conseiller qui creer le client
+	 * @param client
+	 *            client a créer
+	 * @return retourne true si le client a pu etre creer sinon retourne faux
+	 */
+	public boolean creerClient(Conseiller conseiller, Client client);
+
+	/**
+	 * supprime un client
+	 * 
+	 * @param conseiller
+	 *            conseiller qui supprime le client
+	 * @param client
+	 *            client a supprimer
+	 */
+	public void supprimerClient(Conseiller conseiller, Client client);
 }
