@@ -21,10 +21,21 @@ public class Dao implements IDao {
 		try {
 			// prepare la requete
 			PreparedStatement ps = DaoConnexion.getConnexion()
-					.prepareStatement("UPDATE Compte SET solde = ?, WHERE id_compte = ?");
-
+					.prepareStatement("UPDATE Compte SET solde = ?, remuneration = ?, decouvert = ? WHERE id_compte = ?");
+			
 			ps.setDouble(1, compte.getSolde());
-			ps.setInt(2, compte.getIdCompte());
+			
+			if (compte  instanceof CompteCourant) {
+				
+				ps.setNull(2, java.sql.Types.DOUBLE);
+				ps.setDouble(3, (((CompteCourant) compte).getDecouvert()));
+			} else {
+				ps.setDouble(1, compte.getSolde());
+				ps.setDouble (2, (((CompteEpargne) compte).getRemuneration()));
+				ps.setNull(3, java.sql.Types.DOUBLE);
+
+			}
+			ps.setInt(4, compte.getIdCompte());
 
 			// executer la requête pour Coordonnee
 			row += ps.executeUpdate();
