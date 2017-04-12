@@ -16,22 +16,66 @@ import metier.Conseiller;
 public class Dao implements IDao {
 
 	@Override
+	public Collection<Compte> listerComptes() {
+		Collection<Compte> comptes = new ArrayList<Compte>();
+		try {
+			// creer la connexion
+			Connection conn = DaoConnexion.getConnexion();
+
+			// créer la requête
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Compte");
+
+			// executer la requête
+			ResultSet rs = ps.executeQuery();
+			
+			// présenter les résultats
+			while (rs.next()) {
+				String typeCompte = rs.getString("type_compte");
+				if (typeCompte.equals("CompteCourant")) {
+					CompteCourant cc = new CompteCourant();
+					cc.setIdCompte(rs.getInt("id_compte"));
+					cc.setNumeroCompte(rs.getInt("num_compte"));
+					cc.setSolde(rs.getDouble("solde"));
+					cc.setDateOuverture(rs.getString("date_ouverture"));
+					cc.setDecouvert(rs.getDouble("decouvert"));
+					comptes.add(cc);
+				} else {
+					CompteEpargne ce = new CompteEpargne();
+					ce.setIdCompte(rs.getInt("id_compte"));
+					ce.setNumeroCompte(rs.getInt("num_compte"));
+					ce.setSolde(rs.getDouble("solde"));
+					ce.setDateOuverture(rs.getString("date_ouverture"));
+					ce.setRemuneration(rs.getDouble("remuneration"));
+					comptes.add(ce);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// code qui est executé quelque soit les étapes précédentes
+			DaoConnexion.closeConnexion();
+		}
+		return comptes;
+	}
+
+	@Override
 	public int modifierCompte(Compte compte) {
 		int row = 0;
 		try {
 			// prepare la requete
-			PreparedStatement ps = DaoConnexion.getConnexion()
-					.prepareStatement("UPDATE Compte SET solde = ?, remuneration = ?, decouvert = ? WHERE id_compte = ?");
-			
+			PreparedStatement ps = DaoConnexion.getConnexion().prepareStatement(
+					"UPDATE Compte SET solde = ?, remuneration = ?, decouvert = ? WHERE id_compte = ?");
+
 			ps.setDouble(1, compte.getSolde());
-			
-			if (compte  instanceof CompteCourant) {
-				
+
+			if (compte instanceof CompteCourant) {
+
 				ps.setNull(2, java.sql.Types.DOUBLE);
 				ps.setDouble(3, (((CompteCourant) compte).getDecouvert()));
 			} else {
 				ps.setDouble(1, compte.getSolde());
-				ps.setDouble (2, (((CompteEpargne) compte).getRemuneration()));
+				ps.setDouble(2, (((CompteEpargne) compte).getRemuneration()));
 				ps.setNull(3, java.sql.Types.DOUBLE);
 
 			}
@@ -172,7 +216,6 @@ public class Dao implements IDao {
 		return 0;
 	}
 
-
 	@Override
 	public Compte getCompteParId(int id) {
 		String typeCompte;
@@ -187,35 +230,34 @@ public class Dao implements IDao {
 			ps.setInt(1, id);
 			// 4- executer la requête
 			ResultSet rs = ps.executeQuery();
-			
-			// 5- présenter les résultats
-				rs.next();
-				typeCompte = rs.getString("type_compte");
-				
-				if (typeCompte.equals("CompteCourant")) {
-					cc.setIdCompte(rs.getInt("id_compte"));
-					cc.setNumeroCompte(rs.getInt("num_compte"));
-					cc.setSolde(rs.getDouble("solde"));
-					cc.setDateOuverture(rs.getString("date_ouverture"));
-					cc.setDecouvert(rs.getDouble("decouvert"));
-					
-				} else {
-					ce.setIdCompte(rs.getInt("id_compte"));
-					ce.setNumeroCompte(rs.getInt("num_compte"));
-					ce.setSolde(rs.getDouble("solde"));
-					ce.setDateOuverture(rs.getString("date_ouverture"));
-					ce.setRemuneration(rs.getDouble("remuneration"));
-					;
 
-				}
-				if (typeCompte.equals("CompteCourant")) {
-					return (Compte) cc;
-				} else {
-				
-					return (Compte) ce;
-				}
-			
-			
+			// 5- présenter les résultats
+			rs.next();
+			typeCompte = rs.getString("type_compte");
+
+			if (typeCompte.equals("CompteCourant")) {
+				cc.setIdCompte(rs.getInt("id_compte"));
+				cc.setNumeroCompte(rs.getInt("num_compte"));
+				cc.setSolde(rs.getDouble("solde"));
+				cc.setDateOuverture(rs.getString("date_ouverture"));
+				cc.setDecouvert(rs.getDouble("decouvert"));
+
+			} else {
+				ce.setIdCompte(rs.getInt("id_compte"));
+				ce.setNumeroCompte(rs.getInt("num_compte"));
+				ce.setSolde(rs.getDouble("solde"));
+				ce.setDateOuverture(rs.getString("date_ouverture"));
+				ce.setRemuneration(rs.getDouble("remuneration"));
+				;
+
+			}
+			if (typeCompte.equals("CompteCourant")) {
+				return (Compte) cc;
+			} else {
+
+				return (Compte) ce;
+			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
