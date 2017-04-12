@@ -5,7 +5,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ServicesTest.class })
+@SuiteClasses({ DaoTest.class, ServicesTest.class })
+
 public class AllTests {
 
 }
