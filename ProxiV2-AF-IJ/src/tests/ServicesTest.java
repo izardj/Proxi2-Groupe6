@@ -1,8 +1,14 @@
 package tests;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Collection;
+
 import org.junit.Assert;
 import org.junit.Test;
 
+import dao.DaoConnexion;
 import metier.Client;
 import metier.Compte;
 import metier.CompteCourant;
@@ -75,6 +81,57 @@ public class ServicesTest {
 		
 
 	}
+	// cas nominal
+	@Test
+	public void testRecupererAutresComptes(){
+		Compte compte = new CompteCourant();
+		compte.setIdCompte(1);
+		
+		Connection conn = DaoConnexion.getConnexion();
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement("SELECT COUNT(id_client) FROM Compte");
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int nbLignes = rs.getInt(1);
+
+			Collection<Compte> col = iService.recupererAutresComptes(compte);
+
+			Assert.assertEquals(nbLignes-1, col.size());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	
+		
+
+	}	
+	// cas IdCompte inexistant
+	@Test
+	public void testRecupererAutresComptesIdInexistant(){
+		Compte compte = new CompteCourant();
+		compte.setIdCompte(1000);
+		
+		Connection conn = DaoConnexion.getConnexion();
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement("SELECT COUNT(id_client) FROM Compte");
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int nbLignes = rs.getInt(1);
+
+			Collection<Compte> col = iService.recupererAutresComptes(compte);
+
+			Assert.assertNotEquals(nbLignes-1, col.size());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	
+		
+
+	}	
 
 }
