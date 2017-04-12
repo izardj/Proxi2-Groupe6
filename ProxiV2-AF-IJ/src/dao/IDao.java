@@ -8,7 +8,7 @@ import metier.Conseiller;
 
 public interface IDao {
 
-	public int modifierSoldeCompte(Compte compte);
+	public int modifierCompte(Compte compte);
 
 	public int creerConseiller(Conseiller conseiller);
 
@@ -19,8 +19,6 @@ public interface IDao {
 	public int supprimerConseiller(Conseiller conseiller);
 
 	public int creerCompte(Compte compte);
-
-	public int modifierCompte(Compte compte);
 
 	public Compte getCompteParId(int id);
 

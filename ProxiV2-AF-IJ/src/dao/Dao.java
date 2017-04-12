@@ -16,7 +16,7 @@ import metier.Conseiller;
 public class Dao implements IDao {
 
 	@Override
-	public int modifierSoldeCompte(Compte compte) {
+	public int modifierCompte(Compte compte) {
 		int row = 0;
 		try {
 			// prepare la requete
@@ -161,11 +161,6 @@ public class Dao implements IDao {
 		return 0;
 	}
 
-	@Override
-	public int modifierCompte(Compte compte) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public Compte getCompteParId(int id) {

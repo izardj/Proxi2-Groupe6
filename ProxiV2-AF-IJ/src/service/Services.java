@@ -117,10 +117,10 @@ public class Services implements IConseillerService, ILoginService {
 
 			compteDeb.setSolde(debiterCompte(compteDeb, montant).getSolde());
 			// debite un compte et verification que le debit a eu lieu
-			if (iDao.modifierSoldeCompte(compteDeb) == 1) {
+			if (iDao.modifierCompte(compteDeb) == 1) {
 				compteCred.setSolde(crediterCompte(compteCred, montant).getSolde());
 				// credite un compte
-				if (iDao.modifierSoldeCompte(compteCred) == 1) {
+				if (iDao.modifierCompte(compteCred) == 1) {
 					return true;
 				} else {
 					return false;

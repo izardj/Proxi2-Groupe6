@@ -19,7 +19,7 @@ public class DaoTest {
 		Compte c = new CompteCourant();
 		c.setSolde(100);
 		
-		Assert.assertEquals(1, dao.modifierSoldeCompte(c));
+		Assert.assertEquals(1, dao.modifierCompte(c));
 
 	}
 
